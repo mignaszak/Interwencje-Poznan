@@ -47,8 +47,26 @@
 
         <!--ContentPanel - place additional content here-->
         <Grid  x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <TextBlock HorizontalAlignment="Left" Margin="10,372,0,0" TextWrapping="Wrap" Text="Aplikacja korzysta z API Miasta Poznania." VerticalAlignment="Top" Width="436"/>
-            <Button Content="Dalej" Name="buttonNext" HorizontalAlignment="Left" Margin="144,404,0,0" VerticalAlignment="Top" Width="171" Click="buttonNext_Click"/>
+            <TextBlock HorizontalAlignment="Left" Margin="10,315,0,0" TextWrapping="Wrap" Text="Aplikacja korzysta z API Miasta Poznania." VerticalAlignment="Top" Width="436"/>
+            <Button Content="Dalej" Name="buttonNext" HorizontalAlignment="Left" Margin="108,443,0,0" VerticalAlignment="Top" Width="240" Click="buttonNext_Click"/>
+            <TextBlock Margin="9,20,-12,253" FontSize="26" Style="{StaticResource PhoneTextNormalStyle}"   LineStackingStrategy="MaxHeight" TextOptions.TextHintingMode="Fixed" TextWrapping="Wrap">
+            	<Run Text="Przyjmujemy zgłoszenia w kategoriach:"/>
+            	<LineBreak/>
+            	<Run Text="-Ochrona środowiska"/>
+            	<LineBreak/>
+            	<Run Text="-Przystanki MPK"/>
+            	<LineBreak/>
+            	<Run Text="-Szkoła, młodzież"/>
+            	<LineBreak/>
+            	<Run Text="-Zwierzęta"/>
+            	<LineBreak/>
+            	<Run Text="-Porządek w ruchu drogowym"/>
+            	<LineBreak/>
+            	<Run Text="-Bezdomność, zebractwo"/>
+            	<LineBreak/>
+            	<Run Text="-Inne"/>
+            </TextBlock>
+            <Button Content="Wczytaj z pamięci" x:Name="buttonReadFromMemory" HorizontalAlignment="Left" Margin="108,371,0,0" VerticalAlignment="Top" Width="240" Click="buttonReadFromMemory_Click"/>
 
         </Grid>
 

@@ -8,6 +8,7 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using Interwencje___Poznań.Resources;
+using Interwencje___Poznań.Helpers;
 
 namespace Interwencje___Poznań{
     public partial class WelcomePage : PhoneApplicationPage
@@ -24,6 +25,12 @@ namespace Interwencje___Poznań{
         private void buttonNext_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new Uri("/Pages/PhotoPage.xaml", UriKind.Relative));
+        }
+
+        private void buttonReadFromMemory_Click(object sender, RoutedEventArgs e)
+        {
+            Intervention.GetInterventionFromMemory();
+            NavigationService.Navigate(new Uri("/Pages/SummaryPage.xaml", UriKind.Relative));
         }
 
         // Sample code for building a localized ApplicationBar

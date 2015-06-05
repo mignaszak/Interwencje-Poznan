@@ -7,15 +7,24 @@ using Interwencje___Poznań.Resources;
 using Interwencje___Poznań.WebService;
 using System.IO.IsolatedStorage;
 using System.Collections.ObjectModel;
+using System.Windows.Media.Imaging;
+using System.IO;
 
 namespace Interwencje___Poznań.Helpers
 {
     class DataMemory
     {
-        private const string CATEGORIES_KEY = "Last.Categories";
         private static readonly IsolatedStorageSettings appSettings = IsolatedStorageSettings.ApplicationSettings;
+
+        private const string CATEGORIES_KEY = "Last.Categories";
         private static Categories _lastCats;
         public static event EventHandler LastCategoriesUpdated;
+
+        private const string SAVED_INTERVENTION_KEY = "Last.Intervention"; 
+        private const string INTERVENTION_PHOTO_DIR_NAME = "InterventionPhoto";
+        private const string INTERVENTION_PHOTO_FILE_NAME = "InterventionPhoto.jpg";
+        private static Intervention _lastIntervention;
+        public static event EventHandler LastInterventionUpdated;
 
         public static Categories LastCategories
         {
@@ -29,10 +38,7 @@ namespace Interwencje___Poznań.Helpers
                     }
                     else
                     {
-                        _lastCats = new Categories()
-                        {
-                            //FillupHistory = new ObservableCollection<Fillup>()
-                        };
+                        _lastCats = new Categories();
                     }
                 }
                 return _lastCats;
@@ -57,12 +63,113 @@ namespace Interwencje___Poznań.Helpers
                 errorCallback();
             }
         }
-        
 
         private static void NotifyLastCategoriesUpdated()
         {
             var handler = LastCategoriesUpdated;
             if (handler != null) handler(null, null);
+        }
+
+        public static Intervention LastIntervention
+        {
+            get
+            {
+                if (_lastIntervention == null)
+                {
+                    if (appSettings.Contains(SAVED_INTERVENTION_KEY))
+                    {
+                        _lastIntervention = (Intervention)appSettings[SAVED_INTERVENTION_KEY];
+                    }
+                    else
+                    {
+                        _lastIntervention = new Intervention();
+                    }
+                }
+                return _lastIntervention;
+            }
+            set
+            {
+                _lastIntervention = value;
+                NotifyLastInterventionUpdated();
+            }
+        }
+
+        public static void SaveIntervention(Action errorCallback)
+        {
+            try
+            {
+                appSettings[SAVED_INTERVENTION_KEY] = _lastIntervention;
+                appSettings.Save();
+                DeleteTempInterventionPhoto();
+                SaveInterventionPhoto(INTERVENTION_PHOTO_FILE_NAME, _lastIntervention.Picture, errorCallback);
+                NotifyLastInterventionUpdated();
+            }
+            catch (IsolatedStorageException)
+            {
+                errorCallback();
+            }
+        }
+
+        public static void DeleteIntervention()
+        {
+            appSettings.Remove(SAVED_INTERVENTION_KEY);
+            appSettings.Save();
+            DeleteInterventionPhoto();
+            DeleteTempInterventionPhoto();
+            _lastIntervention = null;
+            NotifyLastInterventionUpdated();
+        }
+
+        private static void NotifyLastInterventionUpdated()
+        {
+            var handler = LastInterventionUpdated;
+            if (handler != null) handler(null, null);
+        }
+
+        private static void SaveInterventionPhoto(string fileName, BitmapImage interventionPhoto,
+            Action errorCallback)
+        {
+            if (interventionPhoto == null) return;
+            try
+            {
+                using (var store = IsolatedStorageFile.GetUserStoreForApplication())
+                {
+                    var bitmap = new WriteableBitmap(interventionPhoto);
+                    var path = Path.Combine(INTERVENTION_PHOTO_DIR_NAME, fileName);
+
+                    if (!store.DirectoryExists(INTERVENTION_PHOTO_DIR_NAME))
+                    {
+                        store.CreateDirectory(INTERVENTION_PHOTO_DIR_NAME);
+                    }
+
+                    using (var stream = store.OpenFile(path, FileMode.Create))
+                    {
+                        bitmap.SaveJpeg(stream, bitmap.PixelWidth, bitmap.PixelHeight, 0, 100);
+                    }
+                }
+            }
+            catch (IsolatedStorageException)
+            {
+                errorCallback();
+            }
+        }
+
+        private static void DeleteInterventionPhoto(String fileName)
+        {
+            using (var store = IsolatedStorageFile.GetUserStoreForApplication())
+            {
+                var path = Path.Combine(INTERVENTION_PHOTO_DIR_NAME, fileName);
+                if (store.FileExists(path)) store.DeleteFile(path);
+            }
+        }
+
+        public static void DeleteTempInterventionPhoto()
+        {
+            DeleteInterventionPhoto(INTERVENTION_PHOTO_FILE_NAME);
+        }
+        public static void DeleteInterventionPhoto()
+        {
+            DeleteInterventionPhoto(INTERVENTION_PHOTO_FILE_NAME);
         }
     }
 }

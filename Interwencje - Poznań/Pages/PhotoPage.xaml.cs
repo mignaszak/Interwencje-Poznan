@@ -8,6 +8,8 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using Microsoft.Phone.Tasks;
+using Interwencje___Poznań.Helpers;
+using System.Windows.Media.Imaging;
 
 namespace Interwencje___Poznań.Pages
 {
@@ -30,6 +32,8 @@ namespace Interwencje___Poznań.Pages
 
         private void ButtonNext_Click(object sender, RoutedEventArgs e)
         {
+            if(ImageField.Source != null)
+                Intervention.GetCurrentIntervention().Picture = (BitmapImage)ImageField.Source;
             NavigationService.Navigate(new Uri("/Pages/AddressPage.xaml", UriKind.Relative));
         }
 
@@ -47,6 +51,11 @@ namespace Interwencje___Poznań.Pages
                 bmp.SetSource(e.ChosenPhoto);
                 ImageField.Source = bmp;
             }
+        }
+
+        private void ButtonCancel_Click(object sender, RoutedEventArgs e)
+        {
+            ImageField.Source = null;
         }
     }
 }

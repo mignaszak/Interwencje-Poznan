@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
 
 namespace Interwencje___Poznań.Helpers
 {
@@ -20,7 +21,20 @@ namespace Interwencje___Poznań.Helpers
             }
             return _CurrentIntervention;
         }
-        
+
+        public static void GetInterventionFromMemory()
+        {
+            _CurrentIntervention = DataMemory.LastIntervention;
+        }
+
+        public static void SaveInterventionToMemory()
+        {
+            DataMemory.SaveIntervention(delegate
+            {
+                throw new System.IO.IsolatedStorage.IsolatedStorageException();
+            });
+
+        }        
 
         string _longitude;
         [JsonProperty(PropertyName = "lon")]
@@ -107,6 +121,14 @@ namespace Interwencje___Poznań.Helpers
         {
             get { return _key; }
             set { _key = value; }
+        }
+
+        private BitmapImage _picture;
+
+        public BitmapImage Picture
+        {
+            get { return _picture; }
+            set { _picture = value; }
         }
     }
 }
