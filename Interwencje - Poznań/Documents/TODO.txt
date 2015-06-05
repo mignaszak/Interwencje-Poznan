@@ -1,0 +1,16 @@
+﻿-WelcomPage
+	-poprawić informacje na pierwszej stronie
+	-pobieranie zdarzenia z pamięci telefonu
+-PhotoPage
+	-dodać obsługę apartu
+	-poprawić napisy na buttonach
+-AddresPage
+	-porządnie przetestować pobieranie współrzędnych z wpisanego adresu
+-DetailsPage
+SenderPage
+	-zapisywanie i pobieranie danych o nadawcy z pamięci telefonu
+-SummaryPage
+	-zapisywanie zdarzenia do pamięci telefonu
+
+
+	https://msdn.microsoft.com/en-us/library/gg680266(v=pandp.11).aspx

@@ -1,0 +1,79 @@
+﻿Dzień dobry
+
+Przesyłam informacje dotyczące API dla Interwencji Poznań.
+
+Klucz dla Pana aplikacji: c3c2ff2e008b7bfbef77aba8916df2fe
+Jest on wymagany przy wysyłaniu zgłoszeń, przy czym zastrzegamy sobie
+prawo do dezaktywacji klucza w przypadku nadużyć serwisu.
+
+Adres usługi TESTOWEJ:
+https://www.um.poznan.pl/mimtest/public/api/submit.html?service=fixmycity
+korzystanie wymaga autoryzacji HTTP:
+login: mikolaj.ignaszak@outlook.com
+pass: NNYCk3ghsY
+prosimy o nieudostępnianie danych logowana osobom trzecim.
+
+Prosimy o korzystanie z usługi testowej na etapie testowania aplikacji.
+
+Gotowa aplikacja może korzystać z produkcyjnej usługi, która nie wymaga 
+autoryzacji HTTP:
+https://www.um.poznan.pl/mim/public/api/submit.html?service=fixmycity
+
+Od tego momentu zgłoszenia zaczną trafiać do dyspozytorów Straży
+Miejskiej i MPK (zależnie od kategorii zgłoszenia).
+Na tym etapie również istnieje możliwość wysłania testowego zgłoszenia,
+opatrując je odpowiednim tytułem i opisem w stylu "TEST - proszę
+zignorować zgłoszenie". Prosilibyśmy jednak o nie nadużywanie tej opcji 
+- najlepiej jeśli z tego trybu skorzysta Pan już po gruntownym
+przetestowaniu aplikacji, jako ostatni etap na drodze do jej
+upublicznienia.
+
+W załączniku znajduje się przykładowy formularz http POST. Znajduje się 
+tam struktura żądania z polem na załącznik "uz_file" i polem "json", 
+które obejmuje pola opisowe dla zgłoszenia.
+Specyfikacja pól żądania:
+
+"lon" - długośc geograficzna zgłoszenia (NN.NNNN...)
+"lat" - szerokości geograficzna zgłoszenia (NN.NNNN...)
+"category" - obowiązkowy identyfikator kategorii zgłoszenia
+"subcategory" - obowiązkowy identyfikator podkategorii zgłoszenia
+"name" - imię zgłaszającego, pole obowiązkowe do 128 znaków
+"surname" - nazwisko zgłaszającego, pole obowiązkowe do ,128 znaków
+"email" - email użytkownika, pole obowiązkowe
+"subject" - temat zgłoszenia, pole obowiązkowe do 256 znaków
+"text" - opis zgłoszenia, pole obowiązkowe do 4000 znaków
+"address" - adres, pole opcjonalne, do 256 znaków
+"key" - klucz aplikacji, pole obowiązkowe
+
+wartości pól "category" i "subcategory" powinny być zgodne z
+identyfikatorami ze słownika kategorii, dostępnego pod adresem:
+http://www.poznan.pl/mim/api/query.html?service=fixmycity
+
+pola "lon" i "lat" służą wskazaniu dyspozytorom miejsca zdarzenia, 
+mogą być geokodowanym adresem bądź wskazaniem na mapie albo odczytem 
+GPS. Istnieje możliwość wykorzystania naszej usługi geokodującej adresy:
+http://egov.psnc.pl/node/29#wyszukiwarka_adresow_i_ulic
+oraz usług odwrotnego geokodowania, na przykładzie:
+http://www.poznan.pl/mim/plan/plan.html?co=json&service=adresy&y=52.39&x=16.893&n=2&srs=EPSG:4326
+
+Dodatkowy adres usługi ze słownikiem ulic:
+
+http://www.poznan.pl/mim/public/api/query.html?service=streets&data=dictionary
+zawiera listę nazw ulic i dodatkowo datę aktualizacji słownika ulic, 
+gdyby chciał Pan przechowywać słownik offline i aktualizować w
+miarę potrzeby.
+Usługi bazują na referencyjnej bazie adresowej miasta Poznania.
+
+Na stronie z informacją techniczną http://egov.psnc.pl/api jest krótka
+wzmianka "Jeżeli będziesz korzystał z naszych danych, bądź fair.
+Wystarczy, że w swojej aplikacji podasz link do źródła danych."
+
+Oznacza to, że jedynym warunkiem, jaki nakładamy na strony 
+zainteresowane integracją z API poznan.pl jest umieszczenie w widoczny 
+sposób w aplikacji informacji, że usługa korzysta z API Miasta Poznania.
+Proszę zatem nie zapomnieć o tym wymogu, chyba nie aż tak uciążliwym
+
+Jeżeli ma Pan dalsze pytania, bądź są problemy z działaniem usługi - 
+proszę o kontakt.
+
+Pozdrawiam
