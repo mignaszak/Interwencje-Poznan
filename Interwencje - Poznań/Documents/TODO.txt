@@ -1,9 +1,5 @@
-﻿-WelcomPage
-	-poprawić informacje na pierwszej stronie
-	-pobieranie zdarzenia z pamięci telefonu
--PhotoPage
+﻿-PhotoPage
 	-dodać obsługę apartu
-	-poprawić napisy na buttonach
 -AddresPage
 	-porządnie przetestować pobieranie współrzędnych z wpisanego adresu
 -DetailsPage

@@ -27,8 +27,6 @@ namespace Interwencje___Poznań.Pages
 
         }
 
-
-
         private Categories GetAndSetCategories()
         {
             Categories cats = DataMemory.LastCategories;
@@ -69,21 +67,49 @@ namespace Interwencje___Poznań.Pages
             categories = cats;
             List<Category> sss = cats.categories.ToList();
             PickerCategory.ItemsSource = cats.categories.ToList();
+            string selCat = Intervention.GetCurrentIntervention().Category;
+            if (selCat != "")
+                for (int i = 0; i < PickerCategory.Items.Count; i++)
+                    if (((Category)PickerCategory.Items[i]).id == selCat)
+                        PickerCategory.SelectedItem = PickerCategory.Items[i];
+
+            //PickerCategory.SelectedItem = PickerSubcategory.ItemsSource[3];
         }
         private void SetSubcategories(Category[] cats)
         {
             PickerSubcategory.ItemsSource = cats.ToList();
+            string selSub = Intervention.GetCurrentIntervention().Subcategory;
+            if (selSub != "")
+                for (int i = 0; i < PickerSubcategory.Items.Count; i++)
+                    if (((Category)PickerSubcategory.Items[i]).id == selSub)
+                        PickerSubcategory.SelectedItem = PickerSubcategory.Items[i];
         }
 
         private void ButtonBack_Click(object sender, RoutedEventArgs e)
         {
+            Category selectedCat = (Category)PickerCategory.SelectedItem;
+            Intervention.GetCurrentIntervention().Category = selectedCat.id;
+            Category selectedsSubcat = (Category)PickerSubcategory.SelectedItem;
+            Intervention.GetCurrentIntervention().Subject = TxtSubject.Text;
+            Intervention.GetCurrentIntervention().Text = TxtDescription.Text;
 
             NavigationService.GoBack();
+
         }
 
         private void ButtonNext_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new Uri("/Pages/SenderPage.xaml", UriKind.Relative));
+            if (TxtSubject.Text == "")
+                MessageBox.Show("Wpisz temat zgłoszenia");
+            else if (TxtDescription.Text == "")
+                MessageBox.Show("Wpisz opis zgłoszenia");
+            else
+            {
+                Intervention.GetCurrentIntervention().Subject = TxtSubject.Text;
+                Intervention.GetCurrentIntervention().Text = TxtDescription.Text;
+
+                NavigationService.Navigate(new Uri("/Pages/SenderPage.xaml", UriKind.Relative));
+            }
         }
 
         private void PickerCategory_SelectionChanged(object sender, SelectionChangedEventArgs e)

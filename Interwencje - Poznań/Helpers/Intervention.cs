@@ -10,6 +10,21 @@ namespace Interwencje___Poznań.Helpers
 {
     class Intervention
     {
+        private Intervention()
+        {
+            _latitude = "0.0";
+            _longitude = "0.0";
+            _category = "0";
+            _subcategory = "0";
+            _name = "";
+            _surname = "";
+            _email = "";
+            _subject = "";
+            _text = "";
+            _address = "";
+            _key = "c3c2ff2e008b7bfbef77aba8916df2fe";
+            _picture = null;
+        }
 
         private static Intervention _CurrentIntervention;
         

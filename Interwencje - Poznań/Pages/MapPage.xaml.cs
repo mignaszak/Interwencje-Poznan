@@ -40,8 +40,8 @@ namespace Interwencje___Poznań.Pages
         {
             Point p = e.GetPosition(MapControlLocation);
             GeoCoordinate s = MapControlLocation.ConvertViewportPointToGeoCoordinate(p);
-            Case.UserLatitude = s.Latitude;
-            Case.UserLongitude = s.Longitude;
+            AddressPage.UserLatitude = s.Latitude;
+            AddressPage.UserLongitude = s.Longitude;
 
             Ellipse myCircle = new Ellipse();
             myCircle.Fill = new SolidColorBrush(Colors.Blue);

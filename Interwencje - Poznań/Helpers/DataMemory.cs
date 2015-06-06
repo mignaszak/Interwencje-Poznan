@@ -82,7 +82,7 @@ namespace Interwencje___Poznań.Helpers
                     }
                     else
                     {
-                        _lastIntervention = new Intervention();
+                        _lastIntervention =  Intervention.GetCurrentIntervention();
                     }
                 }
                 return _lastIntervention;

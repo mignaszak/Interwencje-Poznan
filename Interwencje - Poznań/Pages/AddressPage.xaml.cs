@@ -19,23 +19,27 @@ namespace Interwencje___Poznań.Pages
 {
     public partial class AddressPage : PhoneApplicationPage
     {
-
+        public static double UserLongitude;
+        public static double UserLatitude;
 
         public AddressPage()
         {
             InitializeComponent();
-            Case.UserLongitude = 0.0;
-            Case.UserLatitude = 0.0;
+            UserLatitude = double.Parse(Intervention.GetCurrentIntervention().Latitude.Replace(".", ","));
+            UserLongitude = double.Parse(Intervention.GetCurrentIntervention().Longitude.Replace(".", ","));
         }
 
         private void ButtonBack_Click(object sender, RoutedEventArgs e)
         {
-
+            Intervention.GetCurrentIntervention().Latitude = UserLatitude.ToString().Replace(".", ",");
+            Intervention.GetCurrentIntervention().Longitude = UserLongitude.ToString().Replace(".", ",");
             NavigationService.GoBack();
         }
 
         private void ButtonNext_Click(object sender, RoutedEventArgs e)
         {
+            Intervention.GetCurrentIntervention().Latitude = UserLatitude.ToString().Replace(".", ",");
+            Intervention.GetCurrentIntervention().Longitude = UserLongitude.ToString().Replace(".", ",");
             NavigationService.Navigate(new Uri("/Pages/DetailsPage.xaml", UriKind.Relative));
         }
 
@@ -63,8 +67,8 @@ namespace Interwencje___Poznań.Pages
                     Geoposition myGeoposition = await myGeolocator.GetGeopositionAsync();
                     Geocoordinate myGeocoordinate = myGeoposition.Coordinate;
                     GeoCoordinate myGeoCoordinate = CoordinateConverter.ConvertGeocoordinate(myGeocoordinate);
-                    Case.UserLongitude = myGeoCoordinate.Longitude;
-                    Case.UserLatitude = myGeoCoordinate.Latitude;
+                    UserLongitude = myGeoCoordinate.Longitude;
+                    UserLatitude = myGeoCoordinate.Latitude;
                     GetFillStreetInformations();
                 }
             }
@@ -123,7 +127,7 @@ namespace Interwencje___Poznań.Pages
                 int end = lat.IndexOf("&lt;br");
                 lat = lat.Substring(0, end);
                 lat = lat.Trim().Replace(".",",");
-                Case.UserLatitude = double.Parse(lat); 
+                UserLatitude = double.Parse(lat); 
 
                 string lon = "";
                 start = geoRss.IndexOf("lon");
@@ -132,7 +136,7 @@ namespace Interwencje___Poznań.Pages
                 end = lat.IndexOf("&lt;br");
                 lat = lat.Substring(0, end);
                 lat = lat.Trim().Replace(".", ",");
-                Case.UserLongitude = double.Parse(lat);
+                UserLongitude = double.Parse(lat);
             }
             catch (Exception)
             {
@@ -165,9 +169,9 @@ namespace Interwencje___Poznań.Pages
 
             try
             {
-                if (Case.UserLatitude > 0.0 && Case.UserLongitude > 0.0)
+                if (UserLatitude > 0.0 && UserLongitude > 0.0)
                 {
-                    string uri = string.Format("http://www.poznan.pl/mim/plan/plan.html?co=json&service=adresy&y={0}&x={1}&n=2&srs=EPSG:4326", Case.UserLatitude.ToString().Replace(",", "."), Case.UserLongitude.ToString().Replace(",", "."));
+                    string uri = string.Format("http://www.poznan.pl/mim/plan/plan.html?co=json&service=adresy&y={0}&x={1}&n=2&srs=EPSG:4326", UserLatitude.ToString().Replace(",", "."), UserLongitude.ToString().Replace(",", "."));
                     WSMethods.GetMethodNoAuth(uri, GetStreetInformationsFromAPI);
                 }
             }
