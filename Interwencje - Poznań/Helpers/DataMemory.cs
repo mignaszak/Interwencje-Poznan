@@ -25,6 +25,10 @@ namespace Interwencje___Poznań.Helpers
         private const string INTERVENTION_PHOTO_FILE_NAME = "InterventionPhoto.jpg";
         private static Intervention _lastIntervention;
         public static event EventHandler LastInterventionUpdated;
+        
+        private const string USER_KEY = "Current.User";
+        private static User _currentUser;
+        public static event EventHandler CurrentUserUpdated;
 
         public static Categories LastCategories
         {
@@ -170,6 +174,50 @@ namespace Interwencje___Poznań.Helpers
         public static void DeleteInterventionPhoto()
         {
             DeleteInterventionPhoto(INTERVENTION_PHOTO_FILE_NAME);
+        }
+
+        public static User CurrentUser
+        {
+            get
+            {
+                if (_currentUser == null)
+                {
+                    if (appSettings.Contains(USER_KEY))
+                    {
+                        _currentUser = (User)appSettings[USER_KEY];
+                    }
+                    else
+                    {
+                        _currentUser = new User();
+                    }
+                }
+                return _currentUser;
+            }
+            set
+            {
+                _currentUser = value;
+                NotifyCurrentUserUpdated();
+            }
+        }
+
+        public static void SaveUser(Action errorCallback)
+        {
+            try
+            {
+                appSettings[USER_KEY] = _currentUser;
+                appSettings.Save();
+                NotifyCurrentUserUpdated();
+            }
+            catch (IsolatedStorageException)
+            {
+                errorCallback();
+            }
+        }
+
+        private static void NotifyCurrentUserUpdated()
+        {
+            var handler = CurrentUserUpdated;
+            if (handler != null) handler(null, null);
         }
     }
 }

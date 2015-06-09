@@ -44,15 +44,13 @@
                         </Grid>
 
                     </Border>
-                    <Border BorderBrush="{StaticResource PhoneAccentBrush}"  BorderThickness="1" Height="154">
+                    <Border BorderBrush="{StaticResource PhoneAccentBrush}"  BorderThickness="1" Height="121">
                         <Grid Height="169">
                             <TextBlock HorizontalAlignment="Left" Margin="10,0,0,0" TextWrapping="Wrap" Text="Lokalizacja" FontSize="28" VerticalAlignment="Top" Height="39" Width="433" TextDecorations="Underline"/>
-                            <TextBlock HorizontalAlignment="Left" Margin="10,39,0,0" TextWrapping="Wrap" Text="Ulica" VerticalAlignment="Top" FontSize="25" Height="30" Width="107"/>
-                            <TextBlock x:Name="TextBlockStreet" HorizontalAlignment="Left" Margin="122,39,0,0" TextWrapping="Wrap" Text="Ulica" VerticalAlignment="Top" FontSize="25" Height="30" Width="321"/>
-                            <TextBlock HorizontalAlignment="Left" Margin="10,74,0,0" TextWrapping="Wrap" Text="Nr domu" VerticalAlignment="Top" FontSize="25" Height="30" Width="107"/>
-                            <TextBlock x:Name="TextBlockHouse" HorizontalAlignment="Right" Margin="0,74,10,0" TextWrapping="Wrap" Text="Nr. Domu" VerticalAlignment="Top" FontSize="25" Height="30" Width="321"/>
-                            <TextBlock HorizontalAlignment="Left" Margin="10,109,0,0" TextWrapping="Wrap" Text="Współ."  VerticalAlignment="Top" FontSize="25" Height="30" Width="107"/>
-                            <TextBlock x:Name="TextBlockCoordinates" HorizontalAlignment="Right" Margin="0,109,10,0" TextWrapping="Wrap" Text="Współrzędne" VerticalAlignment="Top" FontSize="25" Height="30" Width="321"/>
+                            <TextBlock HorizontalAlignment="Left" Margin="10,39,0,0" TextWrapping="Wrap" Text="Adres" VerticalAlignment="Top" FontSize="25" Height="30" Width="107"/>
+                            <TextBlock x:Name="TextBlockAddress" HorizontalAlignment="Left" Margin="122,39,0,0" TextWrapping="Wrap" Text="Adres" VerticalAlignment="Top" FontSize="25" Height="30" Width="321"/>
+                            <TextBlock HorizontalAlignment="Left" Margin="10,74,0,0" TextWrapping="Wrap" Text="Współ."  VerticalAlignment="Top" FontSize="25" Height="30" Width="107"/>
+                            <TextBlock x:Name="TextBlockCoordinates" HorizontalAlignment="Right" Margin="0,74,10,0" TextWrapping="Wrap" Text="Współrzędne" VerticalAlignment="Top" FontSize="25" Height="30" Width="321"/>
                         </Grid>
                     </Border>
                     <Border BorderBrush="{StaticResource PhoneAccentBrush}"  BorderThickness="1" Height="190">
@@ -69,7 +67,7 @@
                             <TextBlock HorizontalAlignment="Left" Margin="10,74,0,0" TextWrapping="Wrap" Text="Nazwisko" VerticalAlignment="Top" FontSize="25" Height="30" Width="107"/>
                             <TextBlock x:Name="TextBlockSecondname" HorizontalAlignment="Right" Margin="0,74,10,0" TextWrapping="Wrap" Text="Nazwisko" VerticalAlignment="Top" FontSize="25" Height="30" Width="321"/>
                             <TextBlock HorizontalAlignment="Left" Margin="10,109,0,0" TextWrapping="Wrap" Text="E-mail" VerticalAlignment="Top" FontSize="25" Height="30" Width="107"/>
-                            <TextBlock x:Name="TextBlocMail" HorizontalAlignment="Right" Margin="0,109,10,0" TextWrapping="Wrap" Text="Mail" VerticalAlignment="Top" FontSize="25" Height="30" Width="321"/>
+                            <TextBlock x:Name="TextBlockMail" HorizontalAlignment="Right" Margin="0,109,10,0" TextWrapping="Wrap" Text="Mail" VerticalAlignment="Top" FontSize="25" Height="30" Width="321"/>
                         </Grid>
                     </Border>
                 </StackPanel>
@@ -80,7 +78,7 @@
         <Grid Grid.Row="1" Margin="0,516,0,493" >
             <Button Content="Wstecz" x:Name="ButtonBack"  HorizontalAlignment="Left" Margin="12,27,0,0" VerticalAlignment="Top" FlowDirection="LeftToRight" Width="152" RenderTransformOrigin="1.106,0.552" Click="ButtonBack_Click"/>
             <Button Content="Wyślij"  x:Name="ButtonOk" HorizontalAlignment="Left" Margin="316,27,0,0" VerticalAlignment="Top" FlowDirection="LeftToRight" Width="152" RenderTransformOrigin="1.106,0.552" Click="ButtonOk_Click"/>
-            <Button Content="Zapisz"  x:Name="ButtonSave" HorizontalAlignment="Left" Margin="159,27,0,0" VerticalAlignment="Top" FlowDirection="LeftToRight" Width="152" RenderTransformOrigin="1.106,0.552"/>
+            <Button Content="Zapisz"  x:Name="ButtonSave" HorizontalAlignment="Left" Margin="159,27,0,0" VerticalAlignment="Top" FlowDirection="LeftToRight" Width="152" RenderTransformOrigin="1.106,0.552" Click="ButtonSave_Click"/>
 
         </Grid>
     </Grid>

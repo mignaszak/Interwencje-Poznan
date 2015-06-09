@@ -98,6 +98,7 @@
     <Compile Include="Helpers\Deserializers.cs" />
     <Compile Include="Helpers\Exceptions.cs" />
     <Compile Include="Helpers\Intervention.cs" />
+    <Compile Include="Helpers\User.cs" />
     <Compile Include="LocalizedStrings.cs" />
     <Compile Include="Pages\AddressPage.xaml.cs">
       <DependentUpon>AddressPage.xaml</DependentUpon>

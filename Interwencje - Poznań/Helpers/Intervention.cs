@@ -17,7 +17,7 @@ namespace Interwencje___Poznań.Helpers
             _category = "0";
             _subcategory = "0";
             _name = "";
-            _surname = "";
+            _secondname = "";
             _email = "";
             _subject = "";
             _text = "";
@@ -91,12 +91,12 @@ namespace Interwencje___Poznań.Helpers
             set { _name = value; }
         }
 
-        string _surname;
+        string _secondname;
         [JsonProperty(PropertyName = "surname")]
-        public string Surname
+        public string Secondname
         {
-            get { return _surname; }
-            set { _surname = value; }
+            get { return _secondname; }
+            set { _secondname = value; }
         }
 
         string _email;
