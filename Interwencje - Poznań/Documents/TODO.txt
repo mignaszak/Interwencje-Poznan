@@ -16,5 +16,6 @@ Refraktoryzacja
 -SenderPage
 -SummaryPage
 
+to jest branch new_settings
 
 	https://msdn.microsoft.com/en-us/library/gg680266(v=pandp.11).aspx
