@@ -155,7 +155,7 @@ namespace Interwencje___Poznań.Pages
                 }
                 else
                 {
-                    AddressDetails details = Deserializers.DesrielizeAddressDetails(e.Result.ToString());
+                    AddressDetails details = Serialize.DesrielizeAddressDetails(e.Result.ToString());
                     TxtStreet.Text = details.features[0].properties.wg_imienia_wydruk;
                     TxtHouse.Text = details.features[0].properties.nr;
                 }

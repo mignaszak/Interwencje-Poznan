@@ -52,7 +52,7 @@ namespace Interwencje___Poznań.Pages
 
         private void HandlerSetCategories(object sender, DownloadStringCompletedEventArgs e)
         {
-            Categories cats = Deserializers.DesrielizeCategories(e.Result.ToString());
+            Categories cats = Serialize.DesrielizeCategories(e.Result.ToString());
             SetCategories(cats);
             DataMemory.LastCategories = cats;
             DataMemory.SaveCategories(delegate

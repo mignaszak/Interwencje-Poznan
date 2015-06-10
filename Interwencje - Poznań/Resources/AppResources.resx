@@ -146,4 +146,7 @@
   <data name="RequestLink_Test" xml:space="preserve">
     <value>https://www.um.poznan.pl/mimtest/public/api/submit.html?service=fixmycity</value>
   </data>
+  <data name="Key" xml:space="preserve">
+    <value>c3c2ff2e008b7bfbef77aba8916df2fe</value>
+  </data>
 </root>

@@ -88,6 +88,15 @@ namespace Interwencje___Poznań.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to c3c2ff2e008b7bfbef77aba8916df2fe.
+        /// </summary>
+        public static string Key {
+            get {
+                return ResourceManager.GetString("Key", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to mikolaj.ignaszak@outlook.com.
         /// </summary>
         public static string Login {

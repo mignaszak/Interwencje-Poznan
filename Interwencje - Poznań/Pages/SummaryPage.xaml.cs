@@ -17,6 +17,7 @@ namespace Interwencje___Poznań.Pages
         public SummaryPage()
         {
             InitializeComponent();
+            WSMethods.ResponseChanged += ResponseReceived;
         }
 
         private void ButtonBack_Click(object sender, RoutedEventArgs e)
@@ -59,8 +60,15 @@ namespace Interwencje___Poznań.Pages
 
         private void ButtonOk_Click(object sender, RoutedEventArgs e)
         {
+            WSMethods.SendTestRequest();
+            //NavigationService.Navigate(new Uri("/Pages/SummaryPage.xaml", UriKind.Relative));
+        }
 
-            NavigationService.Navigate(new Uri("/Pages/SummaryPage.xaml", UriKind.Relative));
+        private void ResponseReceived(object sender, EventArgs e)
+        {
+            string message = "";
+
+            MessageBox.Show(message);
         }
 
         private void SaveIntervention()
@@ -85,7 +93,7 @@ namespace Interwencje___Poznań.Pages
 
         private void ButtonSave_Click(object sender, RoutedEventArgs e)
         {
-
+            SaveIntervention();
         }
     }
 }

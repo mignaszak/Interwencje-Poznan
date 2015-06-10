@@ -2,9 +2,6 @@
 	-dodać obsługę apartu
 -AddresPage
 	-porządnie przetestować pobieranie współrzędnych z wpisanego adresu
--DetailsPage
-SenderPage
-	-zapisywanie i pobieranie danych o nadawcy z pamięci telefonu
 -SummaryPage
 	-zapisywanie zdarzenia do pamięci telefonu
 

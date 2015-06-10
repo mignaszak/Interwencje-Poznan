@@ -9,7 +9,7 @@ using Interwencje___Poznań.WebService;
 
 namespace Interwencje___Poznań.Helpers
 {
-    class Deserializers
+    class Serialize
     {
         public static AddressDetails DesrielizeAddressDetails(string json)
         {
@@ -21,6 +21,13 @@ namespace Interwencje___Poznań.Helpers
         {
             Categories details = JsonConvert.DeserializeObject<Categories>(json);
             return details;
+        }
+
+        public static string SerializeIntervention(Intervention intervention)
+        {
+            string Json = "";
+            Json = JsonConvert.SerializeObject(intervention);
+            return Json;
         }
     }
 }

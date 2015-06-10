@@ -16,24 +16,40 @@ namespace Interwencje___Poznań.Pages
     public partial class StepPhotoPage : PhoneApplicationPage
     {
         PhotoChooserTask photoChooserTask;
+        BitmapImage bmp;
 
         public StepPhotoPage()
         {
             InitializeComponent();
             photoChooserTask = new PhotoChooserTask();
             photoChooserTask.Completed += new EventHandler<PhotoResult>(photoChooserTask_Completed);
+            GetInterventionData();
         }
 
         private void ButtonBack_Click(object sender, RoutedEventArgs e)
         {
-
+            SaveInterventionData();
             NavigationService.GoBack();
+        }
+
+        private void GetInterventionData()
+        {
+            if (Intervention.GetCurrentIntervention().Picture != null)
+            {
+                bmp = Intervention.GetCurrentIntervention().Picture;
+                ImageField.Source = bmp;
+            }
+        }
+
+        private void SaveInterventionData()
+        {
+            if (bmp != null)
+                Intervention.GetCurrentIntervention().Picture = bmp;
         }
 
         private void ButtonNext_Click(object sender, RoutedEventArgs e)
         {
-            if(ImageField.Source != null)
-                Intervention.GetCurrentIntervention().Picture = (BitmapImage)ImageField.Source;
+            SaveInterventionData();
             NavigationService.Navigate(new Uri("/Pages/AddressPage.xaml", UriKind.Relative));
         }
 
@@ -47,7 +63,7 @@ namespace Interwencje___Poznań.Pages
             if (e.TaskResult == TaskResult.OK)
             {
                 //Code to display the photo on the page in an image control named myImage.
-                System.Windows.Media.Imaging.BitmapImage bmp = new System.Windows.Media.Imaging.BitmapImage();
+                bmp = new System.Windows.Media.Imaging.BitmapImage();                
                 bmp.SetSource(e.ChosenPhoto);
                 ImageField.Source = bmp;
             }

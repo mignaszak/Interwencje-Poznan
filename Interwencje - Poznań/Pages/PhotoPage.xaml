@@ -30,7 +30,7 @@
 
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
             <Image Name="ImageField" HorizontalAlignment="Left" Height="155" Margin="140,46,0,0" VerticalAlignment="Top" Width="182"/>
-            <Button  x:Name="ButtonMakePhoto" Content="Zrób zdjęcie" HorizontalAlignment="Center" Margin="137,206,137,0" VerticalAlignment="Top" FlowDirection="LeftToRight"/>
+            <Button Visibility="Collapsed" x:Name="ButtonMakePhoto" Content="Zrób zdjęcie" HorizontalAlignment="Center" Margin="137,206,137,0" VerticalAlignment="Top" FlowDirection="LeftToRight"/>
             <Button x:Name="ButtonChoosePhoto" Content="Z albumu" HorizontalAlignment="Center" Margin="137,278,137,0" VerticalAlignment="Top" FlowDirection="LeftToRight" Width="182" Click="ButtonChoosePhoto_Click"/>
             <Button  x:Name="ButtonCancel" Content="Anuluj" HorizontalAlignment="Center"  Margin="137,350,137,0" VerticalAlignment="Top" FlowDirection="LeftToRight" Width="182" Click="ButtonCancel_Click"/>
             <Button Content="Wstecz" Name="ButtonBack" HorizontalAlignment="Left" Margin="10,525,0,0" VerticalAlignment="Top" FlowDirection="LeftToRight" Width="182" RenderTransformOrigin="1.106,0.552" Click="ButtonBack_Click"/>

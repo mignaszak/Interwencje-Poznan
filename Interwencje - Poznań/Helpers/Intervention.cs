@@ -22,7 +22,7 @@ namespace Interwencje___Poznań.Helpers
             _subject = "";
             _text = "";
             _address = "";
-            _key = "c3c2ff2e008b7bfbef77aba8916df2fe";
+            _key = Resources.AppResources.Key;
             _picture = null;
         }
 
@@ -140,6 +140,7 @@ namespace Interwencje___Poznań.Helpers
 
         private BitmapImage _picture;
 
+        [JsonIgnoreAttribute]
         public BitmapImage Picture
         {
             get { return _picture; }

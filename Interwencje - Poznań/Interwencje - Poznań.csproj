@@ -95,7 +95,8 @@
     </Compile>
     <Compile Include="Helpers\CoordinateConverter.cs" />
     <Compile Include="Helpers\DataMemory.cs" />
-    <Compile Include="Helpers\Deserializers.cs" />
+    <Compile Include="Helpers\Response.cs" />
+    <Compile Include="Helpers\Serialize.cs" />
     <Compile Include="Helpers\Exceptions.cs" />
     <Compile Include="Helpers\Intervention.cs" />
     <Compile Include="Helpers\User.cs" />
