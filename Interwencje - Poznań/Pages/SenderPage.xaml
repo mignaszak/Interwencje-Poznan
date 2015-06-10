@@ -34,7 +34,7 @@
             <TextBox x:Name="TxtSecondname"  HorizontalAlignment="Left" Height="72" Margin="0,192,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="456"/>
             <TextBlock HorizontalAlignment="Left" Margin="11,267,0,0" TextWrapping="Wrap" Text="Adres e-mail" VerticalAlignment="Top" Height="58" Width="436" FontSize="40"/>
             <TextBox x:Name="TxtMail"  HorizontalAlignment="Left" Height="72" Margin="1,325,-1,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="456"/>
-            <CheckBox Name="CbSave" IsChecked="True" Content="Zapisz dane nadawcy" HorizontalAlignment="Left" Margin="11,422,0,0" VerticalAlignment="Top" Width="284"/>
+            <CheckBox Name="CbSave" Content="Zapisz dane nadawcy" HorizontalAlignment="Left" Margin="11,422,0,0" VerticalAlignment="Top" Width="284" Checked="CbSave_Checked"/>
         </Grid>
 
         <!--ContentPanel - place additional content here-->

@@ -49,7 +49,24 @@ namespace Interwencje___Poznań.Helpers
                 throw new System.IO.IsolatedStorage.IsolatedStorageException();
             });
 
-        }        
+        }
+
+        public static bool CurrentInterventionIsEmpty()
+        {
+
+            return _CurrentIntervention._latitude == "0.0" &&
+            _CurrentIntervention._longitude == "0.0" &&
+            _CurrentIntervention._category == "0" &&
+            _CurrentIntervention._subcategory == "0" &&
+            _CurrentIntervention._name == "" &&
+            _CurrentIntervention._secondname == "" &&
+            _CurrentIntervention._email == "" &&
+            _CurrentIntervention._subject == "" &&
+            _CurrentIntervention._text == "" &&
+            _CurrentIntervention._address == "" &&
+            _CurrentIntervention._key == Resources.AppResources.Key &&
+            _CurrentIntervention._picture == null;
+        }
 
         string _longitude;
         [JsonProperty(PropertyName = "lon")]

@@ -32,6 +32,13 @@ namespace Interwencje___Poznań.Pages
             NavigationService.GoBack();
         }
 
+
+        private void ButtonNext_Click(object sender, RoutedEventArgs e)
+        {
+            SaveInterventionData();
+            NavigationService.Navigate(new Uri("/Pages/AddressPage.xaml", UriKind.Relative));
+        }
+
         private void GetInterventionData()
         {
             if (Intervention.GetCurrentIntervention().Picture != null)
@@ -45,12 +52,6 @@ namespace Interwencje___Poznań.Pages
         {
             if (bmp != null)
                 Intervention.GetCurrentIntervention().Picture = bmp;
-        }
-
-        private void ButtonNext_Click(object sender, RoutedEventArgs e)
-        {
-            SaveInterventionData();
-            NavigationService.Navigate(new Uri("/Pages/AddressPage.xaml", UriKind.Relative));
         }
 
         private void ButtonChoosePhoto_Click(object sender, RoutedEventArgs e)
@@ -72,6 +73,7 @@ namespace Interwencje___Poznań.Pages
         private void ButtonCancel_Click(object sender, RoutedEventArgs e)
         {
             ImageField.Source = null;
+            bmp = null;
         }
     }
 }

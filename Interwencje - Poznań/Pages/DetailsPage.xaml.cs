@@ -20,8 +20,9 @@ namespace Interwencje___Poznań.Pages
         {
             InitializeComponent();
             GetAndSetCategories();
-
+            GetInterventionData();
         }
+
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
 
@@ -72,9 +73,8 @@ namespace Interwencje___Poznań.Pages
                 for (int i = 0; i < PickerCategory.Items.Count; i++)
                     if (((Category)PickerCategory.Items[i]).id == selCat)
                         PickerCategory.SelectedItem = PickerCategory.Items[i];
-
-            //PickerCategory.SelectedItem = PickerSubcategory.ItemsSource[3];
         }
+
         private void SetSubcategories(Category[] cats)
         {
             PickerSubcategory.ItemsSource = cats.ToList();
@@ -87,14 +87,32 @@ namespace Interwencje___Poznań.Pages
 
         private void ButtonBack_Click(object sender, RoutedEventArgs e)
         {
-            Category selectedCat = (Category)PickerCategory.SelectedItem;
-            Intervention.GetCurrentIntervention().Category = selectedCat.id;
-            Category selectedsSubcat = (Category)PickerSubcategory.SelectedItem;
-            Intervention.GetCurrentIntervention().Subject = TxtSubject.Text;
-            Intervention.GetCurrentIntervention().Text = TxtDescription.Text;
-
+            SaveInterventionData();
             NavigationService.GoBack();
 
+        }
+
+        private void GetInterventionData()
+        {
+            TxtSubject.Text = Intervention.GetCurrentIntervention().Subject;
+            TxtDescription.Text = Intervention.GetCurrentIntervention().Text;
+        }
+
+        private void SaveInterventionData()
+        {
+            try
+            {
+                Intervention.GetCurrentIntervention().Subject = TxtSubject.Text;
+                Intervention.GetCurrentIntervention().Text = TxtDescription.Text;
+                Category selectedCat = (Category)PickerCategory.SelectedItem;
+                Intervention.GetCurrentIntervention().Category = selectedCat.id;
+                Category selectedsSubcat = (Category)PickerSubcategory.SelectedItem;
+                Intervention.GetCurrentIntervention().Subcategory = selectedsSubcat.id;
+            }
+            catch (Exception)
+            {
+
+            }
         }
 
         private void ButtonNext_Click(object sender, RoutedEventArgs e)
@@ -105,9 +123,7 @@ namespace Interwencje___Poznań.Pages
                 MessageBox.Show("Wpisz opis zgłoszenia");
             else
             {
-                Intervention.GetCurrentIntervention().Subject = TxtSubject.Text;
-                Intervention.GetCurrentIntervention().Text = TxtDescription.Text;
-
+                SaveInterventionData();
                 NavigationService.Navigate(new Uri("/Pages/SenderPage.xaml", UriKind.Relative));
             }
         }

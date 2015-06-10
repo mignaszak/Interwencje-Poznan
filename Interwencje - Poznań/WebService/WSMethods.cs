@@ -31,10 +31,15 @@ namespace Interwencje___Poznań.WebService
                 downloader.DownloadStringCompleted += new DownloadStringCompletedEventHandler(handler);
                 downloader.DownloadStringAsync(new Uri(uri));
             }
+            catch (NoInternetConnectionException)
+            {
+
+                 throw;
+            }
             catch (Exception)
             {
-                
-               // throw;
+
+                // throw;
             }
         }
 

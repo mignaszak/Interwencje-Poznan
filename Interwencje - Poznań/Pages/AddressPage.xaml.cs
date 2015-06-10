@@ -21,25 +21,44 @@ namespace Interwencje___Poznań.Pages
     {
         public static double UserLongitude;
         public static double UserLatitude;
+        public static string Street;
+        public static string House;
 
         public AddressPage()
         {
             InitializeComponent();
+            GetInterventionData();
+            if(Street != null)
+                TxtStreet.Text = Street;
+            if(House != null)
+                TxtHouse.Text = House;
+        }
+
+        private void GetInterventionData()
+        {
             UserLatitude = double.Parse(Intervention.GetCurrentIntervention().Latitude.Replace(".", ","));
             UserLongitude = double.Parse(Intervention.GetCurrentIntervention().Longitude.Replace(".", ","));
         }
 
-        private void ButtonBack_Click(object sender, RoutedEventArgs e)
+        private void SaveInterventionData()
         {
             Intervention.GetCurrentIntervention().Latitude = UserLatitude.ToString().Replace(".", ",");
             Intervention.GetCurrentIntervention().Longitude = UserLongitude.ToString().Replace(".", ",");
+        }
+
+        private void ButtonBack_Click(object sender, RoutedEventArgs e)
+        {
+            SaveInterventionData();
+            Street = TxtStreet.Text;
+            House = TxtHouse.Text;
             NavigationService.GoBack();
         }
 
         private void ButtonNext_Click(object sender, RoutedEventArgs e)
-        {
-            Intervention.GetCurrentIntervention().Latitude = UserLatitude.ToString().Replace(".", ",");
-            Intervention.GetCurrentIntervention().Longitude = UserLongitude.ToString().Replace(".", ",");
+        {         
+            SaveInterventionData();
+            Street = TxtStreet.Text;
+            House = TxtHouse.Text;
             NavigationService.Navigate(new Uri("/Pages/DetailsPage.xaml", UriKind.Relative));
         }
 
@@ -175,7 +194,9 @@ namespace Interwencje___Poznań.Pages
                     WSMethods.GetMethodNoAuth(uri, GetStreetInformationsFromAPI);
                 }
             }
-            catch (NoInternetConnectionException) { }
+            catch (NoInternetConnectionException) {
+                TextBlockError.Text = "Brak połączenie z internetem, nie można wypełnić informacji o podanym miejscu. Zapytanie może być dalej wypełniane";
+            }
             catch (Exception)
             {
 

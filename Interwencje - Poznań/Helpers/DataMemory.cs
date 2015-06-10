@@ -58,13 +58,23 @@ namespace Interwencje___Poznań.Helpers
         {
             try
             {
-                appSettings[CATEGORIES_KEY] = _lastCats;
+                if (appSettings.Contains(CATEGORIES_KEY))
+                {
+                    appSettings[CATEGORIES_KEY] = _lastCats;
+                }
+                else
+                {
+                    appSettings.Add(CATEGORIES_KEY, _lastCats);
+                }
                 appSettings.Save();
                 NotifyLastCategoriesUpdated();
             }
             catch (IsolatedStorageException)
             {
                 errorCallback();
+            }
+            catch (Exception)
+            {
             }
         }
 
@@ -204,13 +214,23 @@ namespace Interwencje___Poznań.Helpers
         {
             try
             {
-                appSettings[USER_KEY] = _currentUser;
+                if (appSettings.Contains(USER_KEY))
+                {
+                    appSettings[USER_KEY] = _currentUser;
+                }
+                else
+                {
+                    appSettings.Add(USER_KEY, _currentUser);
+                }
                 appSettings.Save();
                 NotifyCurrentUserUpdated();
             }
             catch (IsolatedStorageException)
             {
                 errorCallback();
+            }
+            catch (Exception)
+            {
             }
         }
 

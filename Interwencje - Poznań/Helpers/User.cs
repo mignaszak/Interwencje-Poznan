@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Interwencje___Poznań.Helpers
 {
-    class User
+    public class User
     {
         public string Name { get; set; }
 
@@ -20,13 +20,5 @@ namespace Interwencje___Poznań.Helpers
             this.Secondname = "";
             this.Email = "";
         }
-
-        public User(string name, string secondname, string email)
-        {
-            this.Name = name;
-            this.Secondname = secondname;
-            this.Email = email;
-        }
-
     }
 }

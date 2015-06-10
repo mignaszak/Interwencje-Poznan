@@ -30,7 +30,10 @@ namespace Interwencje___Poznań{
         private void buttonReadFromMemory_Click(object sender, RoutedEventArgs e)
         {
             Intervention.GetInterventionFromMemory();
-            NavigationService.Navigate(new Uri("/Pages/SummaryPage.xaml", UriKind.Relative));
+            if (Intervention.CurrentInterventionIsEmpty())
+                MessageBox.Show("Brak zdarzenia w pamięci");
+            else
+                NavigationService.Navigate(new Uri("/Pages/SummaryPage.xaml", UriKind.Relative));
         }
 
         // Sample code for building a localized ApplicationBar

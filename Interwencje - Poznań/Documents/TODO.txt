@@ -2,8 +2,19 @@
 	-dodać obsługę apartu
 -AddresPage
 	-porządnie przetestować pobieranie współrzędnych z wpisanego adresu
+
+Testy powierzchowne (bez tego co u góry)
+-AddressPage
+-DetailsPage
+-SenderPage
 -SummaryPage
-	-zapisywanie zdarzenia do pamięci telefonu
+
+Refraktoryzacja
+-DetailsPage
+-MapPage
+-PhotoPage
+-SenderPage
+-SummaryPage
 
 
 	https://msdn.microsoft.com/en-us/library/gg680266(v=pandp.11).aspx

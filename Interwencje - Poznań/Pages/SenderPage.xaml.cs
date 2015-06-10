@@ -13,12 +13,12 @@ namespace Interwencje___Poznań.Pages
 {
     public partial class SenderPage : PhoneApplicationPage
     {
+        private static bool CbChecked;
         public SenderPage()
         {
-            GetAndSetUser();
             InitializeComponent();
-
-        }
+            GetAndSetUser();
+        }        
 
         private void GetAndSetUser()
         {
@@ -48,34 +48,41 @@ namespace Interwencje___Poznań.Pages
             }
         }
 
-        private void ButtonBack_Click(object sender, RoutedEventArgs e)
+        private void SaveUser()
         {
+
             if ((bool)CbSave.IsChecked)
             {
-                DataMemory.CurrentUser = new User(TxtFirstName.Text, TxtSecondname.Text, TxtMail.Text);
+                DataMemory.CurrentUser.Name = TxtFirstName.Text;
+                DataMemory.CurrentUser.Secondname = TxtSecondname.Text;
+                DataMemory.CurrentUser.Email = TxtMail.Text;
                 DataMemory.SaveUser(null);
             }
+        }
+
+        private void SaveInterventionData()
+        {
             Intervention.GetCurrentIntervention().Name = TxtFirstName.Text;
             Intervention.GetCurrentIntervention().Secondname = TxtSecondname.Text;
             Intervention.GetCurrentIntervention().Email = TxtMail.Text;
+        }
+
+        private void ButtonBack_Click(object sender, RoutedEventArgs e)
+        {
+            SaveUser();
+            SaveInterventionData();
             NavigationService.GoBack();
         }
 
         private void ButtonNext_Click(object sender, RoutedEventArgs e)
         {
-            if ((bool)CbSave.IsChecked)
-            {
-                DataMemory.CurrentUser = new User(TxtFirstName.Text, TxtSecondname.Text, TxtMail.Text);
-                DataMemory.SaveUser(delegate
-                {
-                    MessageBox.Show(@"Za mało pamięci na telefonie, aby zapisać dane.
-                                      Zwolnij trochę miejsca i spróbuj ponownie.");
-                });
-            }
-            Intervention.GetCurrentIntervention().Name = TxtFirstName.Text;
-            Intervention.GetCurrentIntervention().Secondname = TxtSecondname.Text;
-            Intervention.GetCurrentIntervention().Email = TxtMail.Text;
+            SaveUser();
+            SaveInterventionData();
             NavigationService.Navigate(new Uri("/Pages/SummaryPage.xaml", UriKind.Relative));
+        }
+
+        private void CbSave_Checked(object sender, RoutedEventArgs e)
+        {
         }
     }
 }

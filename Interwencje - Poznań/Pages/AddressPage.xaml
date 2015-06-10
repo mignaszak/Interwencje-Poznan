@@ -34,9 +34,10 @@
             <TextBlock HorizontalAlignment="Left" Margin="10,213,0,0" TextWrapping="Wrap" Text="Numer domu" VerticalAlignment="Top" Height="58" Width="436" FontSize="40"  Grid.Row="2"/>
             <Button Content="Moja pozycja" x:Name="ButtonMyPosition" HorizontalAlignment="Left" VerticalAlignment="Top" FlowDirection="LeftToRight" Width="193" RenderTransformOrigin="1.106,0.552" Margin="10,10,0,0" Grid.Row="0" Click="ButtonMyPosition_Click"/>
             <Button Content="Z mapy" x:Name="ButtonMap" HorizontalAlignment="Left" Margin="264,10,0,0" VerticalAlignment="Top" FlowDirection="LeftToRight" Width="182" RenderTransformOrigin="1.106,0.552" Grid.Row="0" Click="ButtonMap_Click"/>
-            <TextBox Name="TxtStreet" HorizontalAlignment="Left" Height="72" Margin="1,146,-1,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="456"  Grid.Row="1"/>
-            <TextBox Name="TxtHouse"  HorizontalAlignment="Left" Height="72" Margin="0,271,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="456"  Grid.Row="2"/>
-            <Button Content="Sprawdź" x:Name="ButtonCheckPosition" HorizontalAlignment="Left" VerticalAlignment="Top" FlowDirection="LeftToRight" Width="193" RenderTransformOrigin="1.106,0.552" Margin="132,343,0,0" Grid.Row="0" Click="ButtonCheckPosition_Click" />
+            <TextBox Name="TxtStreet" HorizontalAlignment="Left" Height="72" Margin="1,146,-1,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="456"  Grid.Row="1" IsReadOnly="True"/>
+            <TextBox Name="TxtHouse"  HorizontalAlignment="Left" Height="72" Margin="0,271,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="456"  Grid.Row="2" IsReadOnly="True"/>
+            <Button Visibility="Collapsed" Content="Sprawdź" x:Name="ButtonCheckPosition" HorizontalAlignment="Left" VerticalAlignment="Top" FlowDirection="LeftToRight" Width="193" RenderTransformOrigin="1.106,0.552" Margin="132,343,0,0" Grid.Row="0" Click="ButtonCheckPosition_Click" />
+            <TextBlock Name="TextBlockError" HorizontalAlignment="Left" Margin="11,432,-1,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="88" Width="446" FontSize="20"/>
         </Grid>
     </Grid>
 
