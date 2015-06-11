@@ -8,9 +8,9 @@ using System.Windows.Media.Imaging;
 
 namespace Interwencje___Poznań.Helpers
 {
-    class Intervention
+   public class Intervention
     {
-        private Intervention()
+        public Intervention()
         {
             _latitude = "0.0";
             _longitude = "0.0";

@@ -16,7 +16,7 @@ namespace Interwencje___Poznań.WebService
 {
     class WSMethods
     {
-        private static string Response;
+        public static string Response;
         public static event EventHandler ResponseChanged;
 
 
@@ -56,7 +56,7 @@ namespace Interwencje___Poznań.WebService
             NetworkCredential credentials = new NetworkCredential(login, pass);
             string fileName = "test.jpg";
             string fileContentType = "image/jpeg";
-            Uri uri = new Uri("https://www.um.poznan.pl/mimtest/public/api/submit.html?service=fixmycity");
+            Uri uri = new Uri(link);
             byte[] fileData = ConvertToBytes(Intervention.GetCurrentIntervention().Picture);
             UploadFilesToServer(uri, Params, fileName, fileContentType, fileData, credentials);
             return Response;
@@ -71,7 +71,7 @@ namespace Interwencje___Poznań.WebService
             NetworkCredential credentials = null;
             string fileName = "test.jpg";
             string fileContentType = "image/jpeg";
-            Uri uri = new Uri("https://www.um.poznan.pl/mimtest/public/api/submit.html?service=fixmycity");
+            Uri uri = new Uri(link);
             byte[] fileData = ConvertToBytes(Intervention.GetCurrentIntervention().Picture);
             UploadFilesToServer(uri, Params, fileName, fileContentType, fileData, credentials);
             return Response;

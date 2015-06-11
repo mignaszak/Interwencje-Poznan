@@ -18,6 +18,7 @@ namespace Interwencje___Poznań.Pages
         {
             InitializeComponent();
             WSMethods.ResponseChanged += ResponseReceived;
+            FillInterventionInfos();
         }
 
         private void ButtonBack_Click(object sender, RoutedEventArgs e)
@@ -46,7 +47,7 @@ namespace Interwencje___Poznań.Pages
             TextBlockSubject.Text = Intervention.GetCurrentIntervention().Subject;
             TextBlockDescription.Text = Intervention.GetCurrentIntervention().Text;
             TextBlockCategory.Text = GetCategoryName(Intervention.GetCurrentIntervention().Category);
-            TextBlockSubcategory.Text = GetCategoryName(Intervention.GetCurrentIntervention().Subcategory);
+            TextBlockSubcategory.Text = GetSubcategoryName(Intervention.GetCurrentIntervention().Subcategory);
 
             TextBlockAddress.Text = Intervention.GetCurrentIntervention().Address;
             TextBlockCoordinates.Text = Intervention.GetCurrentIntervention().Latitude + ";" + Intervention.GetCurrentIntervention().Longitude;
@@ -67,8 +68,18 @@ namespace Interwencje___Poznań.Pages
         private void ResponseReceived(object sender, EventArgs e)
         {
             string message = "";
+            Response response = Serialize.DesrielizeResponse(WSMethods.Response);
+            if (response.element.error_msg != null && response.element.error_msg != "")
+                message = "Błąd wysyłania sprawy: \r\n" + response.element.error_msg;
+            else
+            {
+                message = string.Format("Sukces!\r\n{0}\r\nid: {1}", response.element.msg, response.element.id);
+            }
+    Deployment.Current.Dispatcher.BeginInvoke(() =>
+    {
+        MessageBox.Show(message);
 
-            MessageBox.Show(message);
+    });
         }
 
         private void SaveIntervention()

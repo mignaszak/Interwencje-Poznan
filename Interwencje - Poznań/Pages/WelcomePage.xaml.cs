@@ -17,9 +17,6 @@ namespace Interwencje___Poznań{
         public WelcomePage()
         {
             InitializeComponent();
-
-            // Sample code to localize the ApplicationBar
-            //BuildLocalizedApplicationBar();
         }
 
         private void buttonNext_Click(object sender, RoutedEventArgs e)

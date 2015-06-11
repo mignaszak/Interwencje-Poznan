@@ -122,6 +122,9 @@ namespace Interwencje___Poznań.Helpers
             {
                 errorCallback();
             }
+            catch (Exception)
+            {
+            }
         }
 
         public static void DeleteIntervention()

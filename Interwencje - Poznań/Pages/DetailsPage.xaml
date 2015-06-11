@@ -48,8 +48,8 @@
             <toolkit:ListPicker x:Name="PickerSubcategory" ItemTemplate="{StaticResource PickerItemTemplate}"   FullModeItemTemplate="{StaticResource PickerFullModeItemTemplate}" Margin="83,72,10,472" ExpansionMode="FullScreenOnly"/>           
             <TextBlock HorizontalAlignment="Left" Margin="10,135,0,0" TextWrapping="Wrap" Text="Temat" VerticalAlignment="Top" Height="58" Width="446" FontSize="40"  Grid.Row="2"/>
             <TextBlock HorizontalAlignment="Left" Margin="10,265,0,0" TextWrapping="Wrap" Text="Opis" VerticalAlignment="Top" Height="58" Width="436" FontSize="40"  Grid.Row="3"/>
-            <TextBox x:Name="TxtSubject" HorizontalAlignment="Left" Height="72" Margin="1,198,-1,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="456" Grid.Row="2"/>
-            <TextBox x:Name="TxtDescription"  HorizontalAlignment="Left" Height="197" Margin="0,323,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="456"  Grid.Row="3"/>
+            <TextBox MaxLength="256"  x:Name="TxtSubject" HorizontalAlignment="Left" Height="72" Margin="1,198,-1,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="456" Grid.Row="2"/>
+            <TextBox MaxLength="4000"  x:Name="TxtDescription"  HorizontalAlignment="Left" Height="197" Margin="0,323,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="456"  Grid.Row="3"/>
         </Grid>
 
         <!--ContentPanel - place additional content here-->

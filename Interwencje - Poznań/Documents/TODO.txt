@@ -2,19 +2,7 @@
 	-dodać obsługę apartu
 -AddresPage
 	-porządnie przetestować pobieranie współrzędnych z wpisanego adresu
-
-Testy powierzchowne (bez tego co u góry)
--AddressPage
--DetailsPage
--SenderPage
--SummaryPage
-
-Refraktoryzacja
--DetailsPage
--MapPage
--PhotoPage
--SenderPage
--SummaryPage
+-Zmiana koncepcji settingsów
 
 
 	https://msdn.microsoft.com/en-us/library/gg680266(v=pandp.11).aspx

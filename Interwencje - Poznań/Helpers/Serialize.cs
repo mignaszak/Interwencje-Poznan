@@ -19,8 +19,14 @@ namespace Interwencje___Poznań.Helpers
 
         public static Categories DesrielizeCategories(string json)
         {
-            Categories details = JsonConvert.DeserializeObject<Categories>(json);
-            return details;
+            Categories categories = JsonConvert.DeserializeObject<Categories>(json);
+            return categories;
+        }
+
+        public static Response DesrielizeResponse(string json)
+        {
+            Response response = JsonConvert.DeserializeObject<Response>(json);
+            return response;
         }
 
         public static string SerializeIntervention(Intervention intervention)
