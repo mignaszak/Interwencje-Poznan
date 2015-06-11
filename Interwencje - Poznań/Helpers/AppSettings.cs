@@ -24,18 +24,16 @@ namespace Interwencje___Poznań.Helpers
         public const string FILE_DIR = "MySettings/Settings.txt";
         #endregion
 
-        private AppSettings _appSettings;
+        private static AppSettings _appSettings;
 
-        public AppSettings CurrentAppSettings
+        public static AppSettings CurrentAppSettings
         {
             get
             {
-return                _appSettings;
+                if (_appSettings == null)
+                    _appSettings = new AppSettings();
 
-            }
-            set
-            {
-                _appSettings = value;
+                return _appSettings;
             }
         }
 
@@ -124,7 +122,7 @@ return                _appSettings;
 
         public object GetSetting(string key)
         {
-            if(key == INTERVENTION_PHOTO_FILE_NAME)
+            if(key == SAVED_INTERVENTION_KEY)
             {
                 return bmp;
             }

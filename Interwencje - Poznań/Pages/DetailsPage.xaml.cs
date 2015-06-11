@@ -30,8 +30,8 @@ namespace Interwencje___Poznań.Pages
 
         private Categories GetAndSetCategories()
         {
-            Categories cats = DataMemory.LastCategories;
-//            cats = AppSettings.
+            Categories cats;// = DataMemory.LastCategories;
+            cats = Serialize.DesrielizeCategories(((string)AppSettings.CurrentAppSettings.GetSetting(AppSettings.CATEGORIES_KEY)));
             try
             {
                 if (WSMethods.CheckNetworkConnection())

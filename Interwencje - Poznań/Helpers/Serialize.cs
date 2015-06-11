@@ -29,5 +29,10 @@ namespace Interwencje___Poznań.Helpers
             Json = JsonConvert.SerializeObject(intervention);
             return Json;
         }
+        public static Intervention DeserializeIntervention(string json)
+        {
+            Intervention intervention = JsonConvert.DeserializeObject<Intervention>(json);
+            return intervention;
+        }
     }
 }
