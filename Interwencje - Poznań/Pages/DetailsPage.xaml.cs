@@ -31,6 +31,7 @@ namespace Interwencje___Poznań.Pages
         private Categories GetAndSetCategories()
         {
             Categories cats = DataMemory.LastCategories;
+//            cats = AppSettings.
             try
             {
                 if (WSMethods.CheckNetworkConnection())

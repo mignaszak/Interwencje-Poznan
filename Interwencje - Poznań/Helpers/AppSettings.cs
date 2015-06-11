@@ -15,15 +15,29 @@ namespace Interwencje___Poznań.Helpers
     {
         private static IsolatedStorageSettings settings1 = IsolatedStorageSettings.ApplicationSettings;
         private Dictionary<string, object> settings;
+        private BitmapImage bmp;
         #region keys
         public const string CATEGORIES_KEY = "Last.Categories";
         public const string SAVED_INTERVENTION_KEY = "Last.Intervention";
-        public const string INTERVENTION_PHOTO_FILE_NAME = "InterventionPhoto\InterventionPhoto.jpg";
+        public const string INTERVENTION_PHOTO_FILE_NAME = @"InterventionPhoto\InterventionPhoto.jpg";
         public const string USER_KEY = "Current.User";
         public const string FILE_DIR = "MySettings/Settings.txt";
         #endregion
 
         private AppSettings _appSettings;
+
+        public AppSettings CurrentAppSettings
+        {
+            get
+            {
+return                _appSettings;
+
+            }
+            set
+            {
+                _appSettings = value;
+            }
+        }
 
         public AppSettings()
         {
@@ -33,6 +47,13 @@ namespace Interwencje___Poznań.Helpers
             settings.Add(USER_KEY, "");
             CreateSettingsFile();
             ReadSettingsFile();
+            ReadPhotoFile();
+        }
+
+        public void Save()
+        {
+            SaveSettings();
+            SavePhoto(INTERVENTION_PHOTO_FILE_NAME, bmp);
         }
 
         public void SaveSettings()
@@ -67,6 +88,8 @@ namespace Interwencje___Poznań.Helpers
             }
         }
 
+
+        
         private void ReadSettingsFile()
         {
             IsolatedStorageFile myIsolatedStorage = IsolatedStorageFile.GetUserStoreForApplication();
@@ -88,38 +111,55 @@ namespace Interwencje___Poznań.Helpers
                 }
             }
         }
+        private void ReadPhotoFile()
+        {
+            using (IsolatedStorageFile ISF = IsolatedStorageFile.GetUserStoreForApplication())
+            {
+                using (IsolatedStorageFileStream FS = ISF.OpenFile(INTERVENTION_PHOTO_FILE_NAME, FileMode.Open, FileAccess.Read))
+                {
+                    bmp.SetSource(FS);
+                }
+            }
+        }
 
         public object GetSetting(string key)
         {
             if(key == INTERVENTION_PHOTO_FILE_NAME)
             {
-                return null;
+                return bmp;
             }
             else
             {
                 return settings[key];
             }
-        }        
+        }
 
         public bool SetSetting(string key, object value)
         {
-            if(key == INTERVENTION_PHOTO_FILE_NAME)
+            if (key == INTERVENTION_PHOTO_FILE_NAME)
             {
-                SavePhoto(key,(BitmapImage)value);
-                return true;
+                try
+                {
+                    SavePhoto(key, (BitmapImage)value);
+                    return true;
+                }
+                catch (Exception)
+                {
+                    return false;         
+                }
             }
             else
             {
                 try
-                {            
+                {
                     settings[key] = value.ToString();
                     return true;
                 }
-                catch(Exception)
+                catch (Exception)
                 {
                     return false;
                 }
-            
+
             }
         }
                 
@@ -128,10 +168,8 @@ namespace Interwencje___Poznań.Helpers
             if (interventionPhoto == null) return;
                 using (var store = IsolatedStorageFile.GetUserStoreForApplication())
                 {
-                    var bitmap = new WriteableBitmap(interventionPhoto);
-                   
+                    var bitmap = new WriteableBitmap(interventionPhoto);                   
                     var path = fileName;
-
                     if (!store.DirectoryExists(fileName))
                     {
                         store.CreateDirectory(fileName);
