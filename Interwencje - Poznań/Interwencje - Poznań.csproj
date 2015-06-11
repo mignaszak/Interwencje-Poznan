@@ -93,6 +93,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\AppSettings.cs" />
     <Compile Include="Helpers\CoordinateConverter.cs" />
     <Compile Include="Helpers\DataMemory.cs" />
     <Compile Include="Helpers\Response.cs" />
