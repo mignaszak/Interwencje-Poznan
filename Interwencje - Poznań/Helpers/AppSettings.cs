@@ -19,7 +19,7 @@ namespace Interwencje___Poznań.Helpers
         #region keys
         public const string CATEGORIES_KEY = "Last.Categories";
         public const string INTERVENTION_KEY = "Last.Intervention";
-        public const string INTERVENTION_PHOTO_FILE_NAME = @"InterventionPhoto\InterventionPhoto.jpg";
+        public const string INTERVENTION_PHOTO_FILE_NAME = @"InterventionPhoto/InterventionPhoto.jpg";
         public const string USER_KEY = "Current.User";
         private const string FILE_DIR = "MySettings/Settings.txt";
         #endregion
@@ -72,17 +72,27 @@ namespace Interwencje___Poznań.Helpers
 
         private void CreateSettingsFile()
         {
-            IsolatedStorageFile myIsolatedStorage = IsolatedStorageFile.GetUserStoreForApplication();
-            if (!myIsolatedStorage.FileExists(FILE_DIR))
+            try
             {
-                using (StreamWriter writeFile = new StreamWriter(new IsolatedStorageFileStream(FILE_DIR, FileMode.Create, FileAccess.Write, myIsolatedStorage)))
-                {                    
+                IsolatedStorageFile myIsolatedStorage = IsolatedStorageFile.GetUserStoreForApplication();
+                if (!myIsolatedStorage.FileExists(FILE_DIR))
+                {
+                    if (!myIsolatedStorage.DirectoryExists(FILE_DIR.Split('/')[0]))
+                    {
+                        myIsolatedStorage.CreateDirectory(FILE_DIR.Split('/')[0]);
+                    }
+                    StreamWriter writeFile = new StreamWriter(new IsolatedStorageFileStream(FILE_DIR, FileMode.Create, FileAccess.Write, FileShare.Write, myIsolatedStorage));
                     string setts = "";
                     foreach (string key in settings.Keys)
                         setts += string.Format("{0}={1}\r\n", key, settings[key]);
                     writeFile.WriteLine(setts);
                     writeFile.Close();
                 }
+            }
+            catch (Exception)
+            {
+                
+            //    throw;
             }
         }
 
@@ -101,7 +111,8 @@ namespace Interwencje___Poznań.Helpers
                     {
                         try
                         {
-                            settings[s.Split('=')[0]] = s.Split('=')[1];
+                            if(s!="")
+                                settings[s.Split('=')[0]] = s.Split('=')[1];
                         }
                         catch (Exception) { }
                     }
@@ -111,11 +122,15 @@ namespace Interwencje___Poznań.Helpers
         }
         private void ReadPhotoFile()
         {
+           
             using (IsolatedStorageFile ISF = IsolatedStorageFile.GetUserStoreForApplication())
             {
-                using (IsolatedStorageFileStream FS = ISF.OpenFile(INTERVENTION_PHOTO_FILE_NAME, FileMode.Open, FileAccess.Read))
+                if (ISF.FileExists(INTERVENTION_PHOTO_FILE_NAME))
                 {
-                    bmp.SetSource(FS);
+                    using (IsolatedStorageFileStream FS = ISF.OpenFile(INTERVENTION_PHOTO_FILE_NAME, FileMode.Open, FileAccess.Read))
+                    {
+                        bmp.SetSource(FS);
+                    }
                 }
             }
         }
