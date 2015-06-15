@@ -11,28 +11,20 @@ namespace Interwencje___Poznań.Helpers
 {
     class Serialize
     {
-        public static AddressDetails DesrielizeAddressDetails(string json)
-        {
-            AddressDetails details = JsonConvert.DeserializeObject<AddressDetails>(json);
-            return details;
-        }
 
-        public static Categories DesrielizeCategories(string json)
+        public static T Deserialize<T>(string json)
         {
-            Categories details = JsonConvert.DeserializeObject<Categories>(json);
-            return details;
-        }
 
-        public static string SerializeIntervention(Intervention intervention)
-        {
-            string Json = "";
-            Json = JsonConvert.SerializeObject(intervention);
-            return Json;
-        }
-        public static Intervention DeserializeIntervention(string json)
-        {
-            Intervention intervention = JsonConvert.DeserializeObject<Intervention>(json);
+            T intervention = JsonConvert.DeserializeObject<T>(json);
             return intervention;
         }
+        public static string SerializeObject(object obj)
+        {
+            string Json = "";
+            Json = JsonConvert.SerializeObject(obj);
+            return Json;
+        }
+
+
     }
 }

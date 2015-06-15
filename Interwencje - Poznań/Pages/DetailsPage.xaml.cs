@@ -31,7 +31,7 @@ namespace Interwencje___Poznań.Pages
         private Categories GetAndSetCategories()
         {
             Categories cats;// = DataMemory.LastCategories;
-            cats = Serialize.DesrielizeCategories(((string)AppSettings.CurrentAppSettings.GetSetting(AppSettings.CATEGORIES_KEY)));
+            cats = Categories.GetCategoriesFromMemory();
             try
             {
                 if (WSMethods.CheckNetworkConnection())
@@ -54,14 +54,17 @@ namespace Interwencje___Poznań.Pages
 
         private void HandlerSetCategories(object sender, DownloadStringCompletedEventArgs e)
         {
-            Categories cats = Serialize.DesrielizeCategories(e.Result.ToString());
-            SetCategories(cats);
-            DataMemory.LastCategories = cats;
-            DataMemory.SaveCategories(delegate
+            try
             {
-                MessageBox.Show(@"Za mało pamięci na telefonie, aby zapisać dane.
-                                      Zwolnij trochę miejsca i spróbuj ponownie.");
-            });
+                Categories cats = Serialize.Deserialize<Categories>(e.Result.ToString());
+                SetCategories(cats);
+
+                AppSettings.CurrentAppSettings.SetSetting(AppSettings.CATEGORIES_KEY, cats);
+            }
+            catch (SaveToMemoryException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void SetCategories(Categories cats)

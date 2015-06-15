@@ -20,5 +20,10 @@ namespace Interwencje___Poznań.Helpers
             this.Secondname = "";
             this.Email = "";
         }
+        public static User GetUserFromMemory()
+        {
+            User cats = Serialize.Deserialize<User>((string)AppSettings.CurrentAppSettings.GetSetting(AppSettings.USER_KEY));
+            return cats;
+        }
     }
 }

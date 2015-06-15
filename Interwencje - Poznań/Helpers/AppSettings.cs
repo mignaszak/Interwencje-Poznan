@@ -18,10 +18,10 @@ namespace Interwencje___Poznań.Helpers
         private BitmapImage bmp;
         #region keys
         public const string CATEGORIES_KEY = "Last.Categories";
-        public const string SAVED_INTERVENTION_KEY = "Last.Intervention";
+        public const string INTERVENTION_KEY = "Last.Intervention";
         public const string INTERVENTION_PHOTO_FILE_NAME = @"InterventionPhoto\InterventionPhoto.jpg";
         public const string USER_KEY = "Current.User";
-        public const string FILE_DIR = "MySettings/Settings.txt";
+        private const string FILE_DIR = "MySettings/Settings.txt";
         #endregion
 
         private static AppSettings _appSettings;
@@ -41,7 +41,7 @@ namespace Interwencje___Poznań.Helpers
         {
             settings = new Dictionary<string, object>();
             settings.Add(CATEGORIES_KEY, "");
-            settings.Add(SAVED_INTERVENTION_KEY, "");
+            settings.Add(INTERVENTION_KEY, "");
             settings.Add(USER_KEY, "");
             CreateSettingsFile();
             ReadSettingsFile();
@@ -54,7 +54,7 @@ namespace Interwencje___Poznań.Helpers
             SavePhoto(INTERVENTION_PHOTO_FILE_NAME, bmp);
         }
 
-        public void SaveSettings()
+        private void SaveSettings()
         {
             IsolatedStorageFile myIsolatedStorage = IsolatedStorageFile.GetUserStoreForApplication();
             if (myIsolatedStorage.FileExists(FILE_DIR))
@@ -122,7 +122,7 @@ namespace Interwencje___Poznań.Helpers
 
         public object GetSetting(string key)
         {
-            if(key == SAVED_INTERVENTION_KEY)
+            if(key == INTERVENTION_KEY)
             {
                 return bmp;
             }
@@ -141,21 +141,22 @@ namespace Interwencje___Poznań.Helpers
                     SavePhoto(key, (BitmapImage)value);
                     return true;
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
-                    return false;         
+                    throw new SaveToMemoryException(e.Message);
                 }
             }
             else
             {
                 try
                 {
-                    settings[key] = value.ToString();
+                    settings[key] = Serialize.SerializeObject(value);
+                    SaveSettings();
                     return true;
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
-                    return false;
+                    throw new SaveToMemoryException(e.Message);
                 }
 
             }

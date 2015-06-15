@@ -39,17 +39,14 @@ namespace Interwencje___Poznań.Helpers
 
         public static void GetInterventionFromMemory()
         {
-            _CurrentIntervention = Serialize.DeserializeIntervention((string)AppSettings.CurrentAppSettings.GetSetting(AppSettings.SAVED_INTERVENTION_KEY));//           _CurrentIntervention = DataMemory.LastIntervention;
+            _CurrentIntervention = Serialize.Deserialize<Intervention>((string)AppSettings.CurrentAppSettings.GetSetting(AppSettings.INTERVENTION_KEY));//           _CurrentIntervention = DataMemory.LastIntervention;
             _CurrentIntervention.Picture = (BitmapImage)AppSettings.CurrentAppSettings.GetSetting(AppSettings.INTERVENTION_PHOTO_FILE_NAME);
         }
 
         public static void SaveInterventionToMemory()
         {
-
-            DataMemory.SaveIntervention(delegate
-            {
-                throw new System.IO.IsolatedStorage.IsolatedStorageException();
-            });
+            AppSettings.CurrentAppSettings.SetSetting(AppSettings.INTERVENTION_PHOTO_FILE_NAME, _CurrentIntervention.Picture);
+            AppSettings.CurrentAppSettings.SetSetting(AppSettings.INTERVENTION_KEY, _CurrentIntervention);
 
         }
 

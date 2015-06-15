@@ -22,13 +22,14 @@ namespace Interwencje___Poznań.Pages
 
         private void GetAndSetUser()
         {
+            User lastUser = User.GetUserFromMemory();
             if (Intervention.GetCurrentIntervention().Name != "")
             {
                 TxtFirstName.Text = Intervention.GetCurrentIntervention().Name;
             }
             else
             {
-                TxtFirstName.Text = DataMemory.CurrentUser.Name;
+                TxtFirstName.Text = lastUser.Name;
             }
             if (Intervention.GetCurrentIntervention().Secondname != "")
             {
@@ -36,7 +37,7 @@ namespace Interwencje___Poznań.Pages
             }
             else
             {
-                TxtSecondname.Text = DataMemory.CurrentUser.Secondname;
+                TxtSecondname.Text = lastUser.Secondname;
             }
             if (Intervention.GetCurrentIntervention().Email != "")
             {
@@ -44,19 +45,27 @@ namespace Interwencje___Poznań.Pages
             }
             else
             {
-                TxtMail.Text = DataMemory.CurrentUser.Email;
+                TxtMail.Text = lastUser.Email;
             }
         }
 
         private void SaveUser()
         {
 
-            if ((bool)CbSave.IsChecked)
+            try
             {
-                DataMemory.CurrentUser.Name = TxtFirstName.Text;
-                DataMemory.CurrentUser.Secondname = TxtSecondname.Text;
-                DataMemory.CurrentUser.Email = TxtMail.Text;
-                DataMemory.SaveUser(null);
+                if ((bool)CbSave.IsChecked)
+                {
+                    User newUser = new User();
+                    newUser.Email = TxtFirstName.Text;
+                    newUser.Secondname = TxtSecondname.Text;
+                    newUser.Email = TxtMail.Text;
+                    AppSettings.CurrentAppSettings.SetSetting(AppSettings.USER_KEY, newUser);
+                }
+            }
+            catch (SaveToMemoryException e)
+            {
+                MessageBox.Show(e.Message);
             }
         }
 

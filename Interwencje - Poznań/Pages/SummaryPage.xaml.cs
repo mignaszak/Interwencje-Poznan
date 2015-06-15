@@ -27,14 +27,16 @@ namespace Interwencje___Poznań.Pages
 
         private string GetCategoryName(string categoryId)
         {
-            foreach (Category c in DataMemory.LastCategories.categories)
+            Categories cats = Categories.GetCategoriesFromMemory();
+            foreach (Category c in cats.categories)
                 if (c.id == categoryId)
                     return c.title;
             return "";
         }
         private string GetSubcategoryName(string subcategoryId)
         {
-            foreach (Category c in DataMemory.LastCategories.categories)
+            Categories cats = Categories.GetCategoriesFromMemory();
+            foreach (Category c in cats.categories)
                 foreach(Category s in c.subcategories)
                 if (s.id == subcategoryId)
                     return s.title;
@@ -73,13 +75,7 @@ namespace Interwencje___Poznań.Pages
 
         private void SaveIntervention()
         {
-            DataMemory.LastIntervention = Intervention.GetCurrentIntervention();
-            
-            DataMemory.SaveIntervention(delegate
-            {
-                MessageBox.Show(@"Za mało pamięci na telefonie, aby zapisać dane.
-                                      Zwolnij trochę miejsca i spróbuj ponownie.");
-            });
+            Intervention.SaveInterventionToMemory();
         }
 
         private void EndOfSaving(bool success)
@@ -93,7 +89,14 @@ namespace Interwencje___Poznań.Pages
 
         private void ButtonSave_Click(object sender, RoutedEventArgs e)
         {
-            SaveIntervention();
+            try
+            {
+                SaveIntervention();
+            }
+            catch (SaveToMemoryException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

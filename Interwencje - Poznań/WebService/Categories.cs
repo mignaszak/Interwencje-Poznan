@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Interwencje___Poznań.Helpers;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,12 @@ namespace Interwencje___Poznań.WebService
     {
         public string timestamp { get; set; }
         public Category[] categories { get; set; }
+
+        public static Categories GetCategoriesFromMemory()
+        {
+            Categories cats = Serialize.Deserialize<Categories>((string)AppSettings.CurrentAppSettings.GetSetting(AppSettings.CATEGORIES_KEY));
+            return cats;
+        }
     }
 
     public class Category

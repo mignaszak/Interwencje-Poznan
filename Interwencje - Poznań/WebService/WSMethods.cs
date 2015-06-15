@@ -48,7 +48,7 @@ namespace Interwencje___Poznań.WebService
         public static string SendTestRequest()
         {
             Response = "";
-            string JsonStringParams = Serialize.SerializeIntervention(Intervention.GetCurrentIntervention());// "{\"lon\":16.234, \"lat\":55.1,\"key\":\"c3c2ff2e008b7bfbef77aba8916df2fe\", \"category\":\"1118_9607\",\"subcategory\":\"17399\", \"name\":\"PCSS test\", \"surname\":\"PCSS test\", \"email\":\"asd@dadsa.pl\", \"subject\":\"PCSS test\", \"text\":\"PCSS test\", \"address\":\"ulica 432\"} ";
+            string JsonStringParams = Serialize.SerializeObject(Intervention.GetCurrentIntervention());// "{\"lon\":16.234, \"lat\":55.1,\"key\":\"c3c2ff2e008b7bfbef77aba8916df2fe\", \"category\":\"1118_9607\",\"subcategory\":\"17399\", \"name\":\"PCSS test\", \"surname\":\"PCSS test\", \"email\":\"asd@dadsa.pl\", \"subject\":\"PCSS test\", \"text\":\"PCSS test\", \"address\":\"ulica 432\"} ";
             var Params = new Dictionary<string, string> { { "json", JsonStringParams } };
             string link = Resources.AppResources.RequestLink_Test;
             string login = Resources.AppResources.Login;
@@ -65,7 +65,7 @@ namespace Interwencje___Poznań.WebService
         public static string SendRequest()
         {
             Response = "";
-            string JsonStringParams = Serialize.SerializeIntervention(Intervention.GetCurrentIntervention());// "{\"lon\":16.234, \"lat\":55.1,\"key\":\"c3c2ff2e008b7bfbef77aba8916df2fe\", \"category\":\"1118_9607\",\"subcategory\":\"17399\", \"name\":\"PCSS test\", \"surname\":\"PCSS test\", \"email\":\"asd@dadsa.pl\", \"subject\":\"PCSS test\", \"text\":\"PCSS test\", \"address\":\"ulica 432\"} ";
+            string JsonStringParams = Serialize.SerializeObject(Intervention.GetCurrentIntervention());// "{\"lon\":16.234, \"lat\":55.1,\"key\":\"c3c2ff2e008b7bfbef77aba8916df2fe\", \"category\":\"1118_9607\",\"subcategory\":\"17399\", \"name\":\"PCSS test\", \"surname\":\"PCSS test\", \"email\":\"asd@dadsa.pl\", \"subject\":\"PCSS test\", \"text\":\"PCSS test\", \"address\":\"ulica 432\"} ";
             var Params = new Dictionary<string, string> { { "json", JsonStringParams } };
             string link = Resources.AppResources.RequestLink;
             NetworkCredential credentials = null;
