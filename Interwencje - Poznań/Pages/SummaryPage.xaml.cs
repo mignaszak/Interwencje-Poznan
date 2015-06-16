@@ -18,6 +18,7 @@ namespace Interwencje___Poznań.Pages
         {
             InitializeComponent();
             WSMethods.ResponseChanged += ResponseReceived;
+            FillInterventionInfos();
         }
 
         private void ButtonBack_Click(object sender, RoutedEventArgs e)
@@ -48,7 +49,7 @@ namespace Interwencje___Poznań.Pages
             TextBlockSubject.Text = Intervention.GetCurrentIntervention().Subject;
             TextBlockDescription.Text = Intervention.GetCurrentIntervention().Text;
             TextBlockCategory.Text = GetCategoryName(Intervention.GetCurrentIntervention().Category);
-            TextBlockSubcategory.Text = GetCategoryName(Intervention.GetCurrentIntervention().Subcategory);
+            TextBlockSubcategory.Text = GetSubcategoryName(Intervention.GetCurrentIntervention().Subcategory);
 
             TextBlockAddress.Text = Intervention.GetCurrentIntervention().Address;
             TextBlockCoordinates.Text = Intervention.GetCurrentIntervention().Latitude + ";" + Intervention.GetCurrentIntervention().Longitude;
@@ -92,6 +93,7 @@ namespace Interwencje___Poznań.Pages
             try
             {
                 SaveIntervention();
+                MessageBox.Show(@"Pomyślnie zapisano");
             }
             catch (SaveToMemoryException ex)
             {

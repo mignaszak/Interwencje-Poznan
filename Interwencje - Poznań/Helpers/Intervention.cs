@@ -40,12 +40,12 @@ namespace Interwencje___Poznań.Helpers
         public static void GetInterventionFromMemory()
         {
             _CurrentIntervention = Serialize.Deserialize<Intervention>((string)AppSettings.CurrentAppSettings.GetSetting(AppSettings.INTERVENTION_KEY));//           _CurrentIntervention = DataMemory.LastIntervention;
-            _CurrentIntervention.Picture = (BitmapImage)AppSettings.CurrentAppSettings.GetSetting(AppSettings.INTERVENTION_PHOTO_FILE_NAME);
+            _CurrentIntervention.Picture = (BitmapImage)AppSettings.CurrentAppSettings.GetSetting(AppSettings.INTERVENTION_PHOTO);
         }
 
         public static void SaveInterventionToMemory()
         {
-            AppSettings.CurrentAppSettings.SetSetting(AppSettings.INTERVENTION_PHOTO_FILE_NAME, _CurrentIntervention.Picture);
+            AppSettings.CurrentAppSettings.SetSetting(AppSettings.INTERVENTION_PHOTO, _CurrentIntervention.Picture);
             AppSettings.CurrentAppSettings.SetSetting(AppSettings.INTERVENTION_KEY, _CurrentIntervention);
 
         }

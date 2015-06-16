@@ -23,45 +23,33 @@ namespace Interwencje___Poznań.Pages
         private void GetAndSetUser()
         {
             User lastUser = User.GetUserFromMemory();
-            if (Intervention.GetCurrentIntervention().Name != "")
+            if(Intervention.GetCurrentIntervention().Name != ""
+                || Intervention.GetCurrentIntervention().Secondname != "" ||
+                Intervention.GetCurrentIntervention().Email != "")
             {
                 TxtFirstName.Text = Intervention.GetCurrentIntervention().Name;
+                TxtSecondname.Text = Intervention.GetCurrentIntervention().Secondname;
+                TxtMail.Text = Intervention.GetCurrentIntervention().Email;
+                
             }
-            else
+            else  if(lastUser != null)
             {
                 TxtFirstName.Text = lastUser.Name;
-            }
-            if (Intervention.GetCurrentIntervention().Secondname != "")
-            {
-                TxtSecondname.Text = Intervention.GetCurrentIntervention().Secondname;
-            }
-            else
-            {
                 TxtSecondname.Text = lastUser.Secondname;
-            }
-            if (Intervention.GetCurrentIntervention().Email != "")
-            {
-                TxtMail.Text = Intervention.GetCurrentIntervention().Email;
-            }
-            else
-            {
                 TxtMail.Text = lastUser.Email;
             }
         }
 
         private void SaveUser()
         {
-
             try
             {
-                if ((bool)CbSave.IsChecked)
-                {
                     User newUser = new User();
-                    newUser.Email = TxtFirstName.Text;
+                    newUser.Name = TxtFirstName.Text;
                     newUser.Secondname = TxtSecondname.Text;
                     newUser.Email = TxtMail.Text;
                     AppSettings.CurrentAppSettings.SetSetting(AppSettings.USER_KEY, newUser);
-                }
+             
             }
             catch (SaveToMemoryException e)
             {
@@ -91,7 +79,6 @@ namespace Interwencje___Poznań.Pages
         }
 
         private void CbSave_Checked(object sender, RoutedEventArgs e)
-        {
-        }
+        {        }
     }
 }

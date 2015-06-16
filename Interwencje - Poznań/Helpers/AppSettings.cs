@@ -19,7 +19,9 @@ namespace Interwencje___Poznań.Helpers
         #region keys
         public const string CATEGORIES_KEY = "Last.Categories";
         public const string INTERVENTION_KEY = "Last.Intervention";
-        public const string INTERVENTION_PHOTO_FILE_NAME = @"InterventionPhoto/InterventionPhoto.jpg";
+        public const string INTERVENTION_PHOTO ="Intervention.Photo";
+        private const string INTERVENTION_PHOTO_FILE_DIR = @"InterventionPhoto";
+        private const string INTERVENTION_PHOTO_FILE_NAME = "InterventionPhoto.jpg";
         public const string USER_KEY = "Current.User";
         private const string FILE_DIR = "MySettings/Settings.txt";
         #endregion
@@ -51,7 +53,7 @@ namespace Interwencje___Poznań.Helpers
         public void Save()
         {
             SaveSettings();
-            SavePhoto(INTERVENTION_PHOTO_FILE_NAME, bmp);
+            SavePhoto( bmp);
         }
 
         private void SaveSettings()
@@ -122,22 +124,41 @@ namespace Interwencje___Poznań.Helpers
         }
         private void ReadPhotoFile()
         {
-           
-            using (IsolatedStorageFile ISF = IsolatedStorageFile.GetUserStoreForApplication())
+            try
             {
-                if (ISF.FileExists(INTERVENTION_PHOTO_FILE_NAME))
+                using (IsolatedStorageFile ISF = IsolatedStorageFile.GetUserStoreForApplication())
                 {
-                    using (IsolatedStorageFileStream FS = ISF.OpenFile(INTERVENTION_PHOTO_FILE_NAME, FileMode.Open, FileAccess.Read))
+                    var path = Path.Combine( INTERVENTION_PHOTO_FILE_NAME);
+                    if (ISF.FileExists(path))
                     {
-                        bmp.SetSource(FS);
+                        using (IsolatedStorageFileStream FS = ISF.OpenFile(path, FileMode.Open, FileAccess.Read))
+                        {
+                            bmp.SetSource(FS);
+                        }
                     }
+                }
+            }
+            catch (Exception e)
+            {
+
+            }
+        }
+        private void ReadPhotoFile1()
+        {
+            IsolatedStorageFile isoStorage = IsolatedStorageFile.GetUserStoreForApplication();
+            var path = Path.Combine(INTERVENTION_PHOTO_FILE_DIR, INTERVENTION_PHOTO_FILE_NAME);
+            if (isoStorage.FileExists(path))
+            {
+                using (IsolatedStorageFileStream fileStream = isoStorage.OpenFile(path, FileMode.Open, FileAccess.Read))
+                {
+                    bmp.SetSource(fileStream);
                 }
             }
         }
 
         public object GetSetting(string key)
         {
-            if(key == INTERVENTION_KEY)
+            if (key == INTERVENTION_PHOTO)
             {
                 return bmp;
             }
@@ -149,11 +170,11 @@ namespace Interwencje___Poznań.Helpers
 
         public bool SetSetting(string key, object value)
         {
-            if (key == INTERVENTION_PHOTO_FILE_NAME)
+            if (key == INTERVENTION_PHOTO)
             {
                 try
                 {
-                    SavePhoto(key, (BitmapImage)value);
+                    SavePhoto( (BitmapImage)value);
                     return true;
                 }
                 catch (Exception e)
@@ -176,20 +197,22 @@ namespace Interwencje___Poznań.Helpers
 
             }
         }
-                
-        private static void SavePhoto(string fileName, BitmapImage interventionPhoto)
+        
+        private static void SavePhoto( BitmapImage interventionPhoto)
         {
             if (interventionPhoto == null) return;
                 using (var store = IsolatedStorageFile.GetUserStoreForApplication())
                 {
-                    var bitmap = new WriteableBitmap(interventionPhoto);                   
-                    var path = fileName;
-                    if (!store.DirectoryExists(fileName))
-                    {
-                        store.CreateDirectory(fileName);
-                    }
+                    var path = Path.Combine( INTERVENTION_PHOTO_FILE_NAME);
+                    var bitmap = new WriteableBitmap(interventionPhoto);
+                    //if (!store.DirectoryExists(INTERVENTION_PHOTO_FILE_DIR))
+                    //{
+                    //    store.CreateDirectory(INTERVENTION_PHOTO_FILE_DIR);
+                    //}
+                    if (store.FileExists(path)) store.DeleteFile(path);
 
-                    using (var stream = store.OpenFile(path, FileMode.Create))
+                    //using (StreamWriter stream = new StreamWriter(new IsolatedStorageFileStream(FILE_DIR, FileMode.Open, FileAccess.Write, myIsolatedStorage)))
+                    using (var stream = store.CreateFile(path))
                     {
                         bitmap.SaveJpeg(stream, bitmap.PixelWidth, bitmap.PixelHeight, 0, 100);
                     }

@@ -78,7 +78,7 @@
         <Grid Grid.Row="1" Margin="0,516,0,493" >
             <Button Content="Wstecz" x:Name="ButtonBack"  HorizontalAlignment="Left" Margin="12,27,0,0" VerticalAlignment="Top" FlowDirection="LeftToRight" Width="152" RenderTransformOrigin="1.106,0.552" Click="ButtonBack_Click"/>
             <Button Content="Wyślij"  x:Name="ButtonOk" HorizontalAlignment="Left" Margin="316,27,0,0" VerticalAlignment="Top" FlowDirection="LeftToRight" Width="152" RenderTransformOrigin="1.106,0.552" Click="ButtonOk_Click"/>
-            <Button Content="Zapisz"  x:Name="ButtonSave" HorizontalAlignment="Left" Margin="159,27,0,0" VerticalAlignment="Top" FlowDirection="LeftToRight" Width="152" RenderTransformOrigin="1.106,0.552" Click="ButtonSave_Click"/>
+            <Button Visibility="Collapsed" Content="Zapisz"  x:Name="ButtonSave" HorizontalAlignment="Left" Margin="159,27,0,0" VerticalAlignment="Top" FlowDirection="LeftToRight" Width="152" RenderTransformOrigin="1.106,0.552" Click="ButtonSave_Click"/>
 
         </Grid>
     </Grid>
