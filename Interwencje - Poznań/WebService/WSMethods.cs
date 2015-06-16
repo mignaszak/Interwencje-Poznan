@@ -16,7 +16,7 @@ namespace Interwencje___Poznań.WebService
 {
     class WSMethods
     {
-        private static string Response;
+        public static string Response;
         public static event EventHandler ResponseChanged;
 
 

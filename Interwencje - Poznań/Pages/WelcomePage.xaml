@@ -41,7 +41,7 @@
 
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock Text="INTERWENCJE POZNAN" Style="{StaticResource PhoneTextNormalStyle}" Margin="12,0"/>
+             <TextBlock Text="INTERWENCJE POZNAN" Style="{StaticResource PhoneTextNormalStyle}" Margin="12,0"/>
             <TextBlock Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}" Height="172" FontSize="36" Text="Witamy w systemie zgłaszania interwencji do służb miejskich"  LineStackingStrategy="MaxHeight" TextOptions.TextHintingMode="Fixed" TextWrapping="Wrap"/>
         </StackPanel>
 

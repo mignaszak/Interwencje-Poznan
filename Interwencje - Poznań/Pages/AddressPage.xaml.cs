@@ -42,8 +42,12 @@ namespace Interwencje___Poznań.Pages
 
         private void SaveInterventionData()
         {
-            Intervention.GetCurrentIntervention().Latitude = UserLatitude.ToString().Replace(".", ",");
-            Intervention.GetCurrentIntervention().Longitude = UserLongitude.ToString().Replace(".", ",");
+            Intervention.GetCurrentIntervention().Latitude = UserLatitude.ToString().Replace(",", ".");
+            Intervention.GetCurrentIntervention().Longitude = UserLongitude.ToString().Replace(",", ".");
+            string adr = TxtStreet.Text + " " + TxtHouse.Text;
+            if (adr.Length > 256)
+                adr = adr.Substring(0, 256);
+            Intervention.GetCurrentIntervention().Address = adr;
         }
 
         private void ButtonBack_Click(object sender, RoutedEventArgs e)

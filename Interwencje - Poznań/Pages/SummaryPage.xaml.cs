@@ -14,11 +14,27 @@ namespace Interwencje___Poznań.Pages
 {
     public partial class SummaryPage : PhoneApplicationPage
     {
+        
+
         public SummaryPage()
         {
             InitializeComponent();
             WSMethods.ResponseChanged += ResponseReceived;
             FillInterventionInfos();
+        }
+
+        private void SetProgressIndicator(bool value)
+        {
+            customIndeterminateProgressBar.IsIndeterminate = value;
+
+            if (value)
+            {
+                customIndeterminateProgressBar.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                customIndeterminateProgressBar.Visibility = Visibility.Collapsed;
+            }
         }
 
         private void ButtonBack_Click(object sender, RoutedEventArgs e)
@@ -63,6 +79,7 @@ namespace Interwencje___Poznań.Pages
 
         private void ButtonOk_Click(object sender, RoutedEventArgs e)
         {
+            SetProgressIndicator(true);
             WSMethods.SendTestRequest();
             //NavigationService.Navigate(new Uri("/Pages/SummaryPage.xaml", UriKind.Relative));
         }
@@ -70,8 +87,19 @@ namespace Interwencje___Poznań.Pages
         private void ResponseReceived(object sender, EventArgs e)
         {
             string message = "";
+            Response response = Serialize.Deserialize<Response>(WSMethods.Response);
+            if (response.element.error_msg != null && response.element.error_msg != "")
+                message = "Błąd wysyłania sprawy: \r\n" + response.element.error_msg;
+            else
+            {
+                message = string.Format("Sukces!\r\n{0}\r\nid: {1}", response.element.msg, response.element.id);
+            }
+            Deployment.Current.Dispatcher.BeginInvoke(() =>
+            {
+                SetProgressIndicator(false);
+                MessageBox.Show(message);
 
-            MessageBox.Show(message);
+            });
         }
 
         private void SaveIntervention()
